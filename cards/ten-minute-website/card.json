@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "十分钟上线你的 Airbnb 房源网站",
-    "en": "Your Airbnb listing site in 10 minutes"
+    "en": "Your Airbnb listing site in 10 minutes",
+    "th": "สร้างเว็บ Airbnb ของคุณใน 10 นาที"
   },
   "category": "build-an-idea",
   "categoryLabel": "✨ 帮你完成一个想法",
@@ -11,7 +12,9 @@
   "ageBands": "人人 / Airbnb 房东",
   "experiments": 4,
   "summary": {
-    "zh": "有一两间空房出租？房间、照片、评价、周边一页搞定，还能加预订。二维码印名片，客人自己看，不用一条条重发。"
+    "zh": "有一两间空房出租？房间、照片、评价、周边一页搞定，还能加预订。二维码印名片，客人自己看，不用一条条重发。",
+    "en": "One or two rooms to rent? Build a proper listing site in 10 minutes — with booking and a QR code.",
+    "th": "มีห้องว่างสักหนึ่งสองห้อง? สร้างเว็บแนะนำที่พักใน 10 นาที พร้อมจองและ QR code"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "部署上线 + 域名 + 二维码"
   ],
   "companion": "doris-smile",
-  "status": "review"
+  "status": "review",
+  "body": {
+    "experience": {
+      "zh": "有一两间空房出租？房间、照片、评价、周边、你对这座城市的理解，一页搞定，还能加预订。二维码印名片，客人自己看，不用一条条重发信息——顺便帮你记住域名、帮你宣传。",
+      "en": "Got a spare room or two to rent? Rooms, photos, reviews, the neighborhood, your local knowledge — all on one page, with booking. Put the QR code on a card; guests browse it themselves instead of you re-sending info — and it helps them remember your domain.",
+      "th": "มีห้องว่างสักหนึ่งสองห้องให้เช่า? ห้อง รูป รีวิว ย่าน และความรู้ท้องถิ่นของคุณ อยู่ในหน้าเดียว พร้อมจอง ใส่ QR code บนนามบัตร แขกดูเองไม่ต้องส่งข้อมูลซ้ำ ๆ และช่วยให้จำโดเมนคุณได้"
+    },
+    "principle": {
+      "zh": "你不需要“会做网站”，只需要“会描述你想要什么”。背后是 AI 把自然语言变成能跑的网页：你说“一个介绍我 Airbnb 房源的单页，顶部大图、房间列表、评价、地图、一个预订按钮”，它就生成对应的 HTML/CSS/JS。像 E2B Fragments 这类工具更进一步，把生成的代码放进安全沙箱当场运行，你立刻看到效果，不满意就继续说“把按钮放大/换暖色”。满意后部署拿网址，再生成二维码。AI 把“开发网站”压缩成“对话+微调”。",
+      "en": "You don't need to 'build websites' — just to describe what you want. AI turns natural language into a running web page: say 'a single page for my Airbnb listing, hero image, room list, reviews, a map, a booking button,' and it generates the HTML/CSS/JS. Tools like E2B Fragments go further, running the generated code in a safe sandbox so you see it instantly and can keep saying 'make the button bigger / warmer colors.' Deploy for a URL, then make a QR code. AI compresses 'web development' into 'chat + tweak.'",
+      "th": "คุณไม่ต้อง 'ทำเว็บเป็น' แค่บรรยายสิ่งที่ต้องการ AI เปลี่ยนภาษาพูดเป็นหน้าเว็บที่รันได้: พูดว่า 'หน้าเดียวแนะนำที่พัก Airbnb รูปใหญ่ด้านบน รายการห้อง รีวิว แผนที่ ปุ่มจอง' มันก็สร้าง HTML/CSS/JS เครื่องมืออย่าง E2B Fragments ไปไกลกว่านั้น รันโค้ดในแซนด์บ็อกซ์ให้เห็นทันที ปรับต่อได้ 'ปุ่มใหญ่ขึ้น/สีอุ่นขึ้น' ดีพลอยได้ URL แล้วทำ QR code AI ย่อ 'การพัฒนาเว็บ' เป็น 'คุย + ปรับ'"
+    },
+    "learn": {
+      "zh": [
+        "把“介绍自己/生意”结构化成一个页面（信息架构的直觉）",
+        "用自然语言迭代 UI：一次改一个地方，越改越合意",
+        "上线的完整链路：生成→预览→部署→域名→二维码"
+      ],
+      "en": [
+        "Structure 'introducing yourself/your business' into a page (information-architecture intuition)",
+        "Iterate UI in plain language: change one thing at a time",
+        "The full go-live path: generate → preview → deploy → domain → QR code"
+      ],
+      "th": [
+        "จัด 'การแนะนำตัว/ธุรกิจ' ให้เป็นหน้า (สัญชาตญาณสถาปัตยกรรมข้อมูล)",
+        "ปรับ UI ด้วยภาษาพูด: เปลี่ยนทีละอย่าง",
+        "เส้นทางขึ้นจริงครบ: สร้าง → พรีวิว → ดีพลอย → โดเมน → QR code"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快（无代码）：Google AI Studio → Build，一句话描述房源单页，替换照片文案",
+        "边生成边运行：clone e2b-dev/fragments（开源版 v0），配 LLM key 本地玩",
+        "加预订：接一个表单/预订服务，或嵌入第三方组件",
+        "上线+二维码：部署 Cloudflare Pages/Vercel 拿网址，用二维码生成器印名片"
+      ],
+      "en": [
+        "Fastest (no code): Google AI Studio → Build, describe the listing page, swap in your photos/copy",
+        "Generate-and-run: clone e2b-dev/fragments (open-source v0), add an LLM key, play locally",
+        "Add booking: wire a form/booking service or embed a third-party widget",
+        "Ship + QR: deploy to Cloudflare Pages/Vercel for a URL, turn it into a QR code for your card"
+      ],
+      "th": [
+        "เร็วที่สุด (ไม่โค้ด): Google AI Studio → Build บรรยายหน้าที่พัก แล้วสลับรูป/ข้อความ",
+        "สร้างแล้วรัน: clone e2b-dev/fragments (v0 โอเพนซอร์ส) ใส่ LLM key เล่นในเครื่อง",
+        "เพิ่มการจอง: ต่อฟอร์ม/บริการจอง หรือฝังวิดเจ็ตภายนอก",
+        "ปล่อย + QR: ดีพลอย Cloudflare Pages/Vercel ได้ URL แล้วทำ QR code ใส่นามบัตร"
+      ]
+    }
+  }
 }

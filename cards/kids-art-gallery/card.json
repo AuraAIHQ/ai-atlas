@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "给孩子办一场线上画展",
-    "en": "An online gallery for your kid's art"
+    "en": "An online gallery for your kid's art",
+    "th": "จัดนิทรรศการภาพวาดออนไลน์ให้ลูก"
   },
   "category": "build-an-idea",
   "categoryLabel": "✨ 帮你完成一个想法",
@@ -11,7 +12,9 @@
   "ageBands": "有孩子的家庭",
   "experiments": 4,
   "summary": {
-    "zh": "把孩子的画拍下来，十分钟做一个会发光、能旋转、带网址的在线画廊；可配文字甚至配音。"
+    "zh": "把孩子的画拍下来，十分钟做一个会发光、能旋转、带网址的在线画廊；可配文字甚至配音。",
+    "en": "Photograph your kid's drawings and build a glowing online gallery in 10 minutes.",
+    "th": "ถ่ายภาพวาดของลูก แล้วสร้างแกลเลอรีออนไลน์เรืองแสงใน 10 นาที"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "让孩子自己逐幅讲解"
   ],
   "companion": "cherry-smile",
-  "status": "review"
+  "status": "review",
+  "body": {
+    "experience": {
+      "zh": "办一场实体画展几乎不可能、也很贵。把孩子的画拍下来，十分钟做一个会发光、能旋转、带网址的在线画廊；可配文字甚至配音，孩子能逐幅讲给别人听。",
+      "en": "A real art show is nearly impossible and expensive. Photograph your kid's drawings and, in ten minutes, build a glowing, spinnable online gallery with its own URL — add captions or even voice-over so your child can present each piece.",
+      "th": "จัดนิทรรศการจริงแทบเป็นไปไม่ได้และแพง ถ่ายภาพวาดของลูก แล้วใน 10 นาทีสร้างแกลเลอรีออนไลน์ที่เรืองแสง หมุนได้ มี URL ของตัวเอง ใส่คำบรรยายหรือแม้แต่พากย์เสียงให้ลูกเล่าแต่ละภาพได้"
+    },
+    "principle": {
+      "zh": "这张卡的魔法不是“AI 画画”，而是 AI 帮你写一个网页（vibe coding）。你用一句话描述想要的画廊，大模型把它翻译成前端代码——因为它读过海量网页代码，知道“画廊”怎么写。你把画作照片放进去，再让它加“灯光、旋转、放大”这些效果，每个都是一小段它熟悉的代码。最后一键部署，就有了能发给亲友的网址。AI 把“我不会写网站”变成“我会描述我想要什么”。",
+      "en": "The magic isn't 'AI paints' — it's AI writing a web page for you (vibe coding). You describe the gallery in a sentence; the model translates it into front-end code, because it has read tons of web code and knows what a 'gallery' looks like. You drop in the photos, then ask for 'lighting, rotation, zoom' — each a small snippet it knows. Deploy, and you have a URL to share. AI turns 'I can't build a site' into 'I can describe what I want.'",
+      "th": "เวทมนตร์ไม่ใช่ 'AI วาดภาพ' แต่คือ AI เขียนหน้าเว็บให้คุณ (vibe coding) คุณบรรยายแกลเลอรีในประโยคเดียว โมเดลแปลเป็นโค้ดฝั่งหน้า เพราะมันอ่านโค้ดเว็บมามหาศาลและรู้ว่า 'แกลเลอรี' หน้าตาเป็นอย่างไร ใส่ภาพเข้าไป แล้วขอ 'แสง หมุน ซูม' แต่ละอย่างเป็นโค้ดสั้น ๆ ที่มันรู้จัก ดีพลอยแล้วได้ URL ไว้แชร์ AI เปลี่ยน 'ฉันทำเว็บไม่เป็น' เป็น 'ฉันบรรยายสิ่งที่ต้องการได้'"
+    },
+    "learn": {
+      "zh": [
+        "把照片/作品变成可分享的作品集（“把东西搬上网”的完整链路）",
+        "用自然语言迭代代码：不满意就继续说“再加个旋转 / 换个字体”",
+        "进阶效果其实是一个个可叠加的小模块"
+      ],
+      "en": [
+        "Turn photos into a shareable collection (the full 'put it online' pipeline)",
+        "Iterate code in plain language: keep saying 'add rotation / change the font'",
+        "Fancy effects are just stackable little modules"
+      ],
+      "th": [
+        "เปลี่ยนภาพเป็นคอลเลกชันที่แชร์ได้ (ครบลูป 'เอาขึ้นเว็บ')",
+        "ปรับโค้ดด้วยภาษาพูด: พูดต่อได้ว่า 'เพิ่มการหมุน / เปลี่ยนฟอนต์'",
+        "เอฟเฟกต์เก๋ ๆ ก็คือโมดูลเล็ก ๆ ที่ซ้อนกันได้"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：Google AI Studio → Build，一句话描述画廊，生成 React 应用，替换成孩子的画",
+        "看生成式建站：clone Nutlope/llamacoder（一句 prompt 生成小应用）",
+        "加进阶效果：让 AI 加“轮播/点击放大/背景音乐（配音）”，每次说一个",
+        "上线+配音：部署到 Cloudflare Pages 拿网址；配音用浏览器录音或文本转语音"
+      ],
+      "en": [
+        "Fastest: Google AI Studio → Build, describe the gallery, generate a React app, swap in the drawings",
+        "See generative site-building: clone Nutlope/llamacoder (one prompt → a small app)",
+        "Add effects: ask the AI for 'carousel / click-to-zoom / background music (voice-over)', one at a time",
+        "Ship + voice: deploy to Cloudflare Pages for a URL; record voice-over in the browser or via text-to-speech"
+      ],
+      "th": [
+        "เร็วที่สุด: Google AI Studio → Build บรรยายแกลเลอรี สร้างแอป React แล้วสลับภาพวาดเข้าไป",
+        "ดูการสร้างเว็บเชิงกำเนิด: clone Nutlope/llamacoder (prompt เดียว → แอปเล็ก)",
+        "เพิ่มเอฟเฟกต์: ขอ AI ทีละอย่าง 'สไลด์/คลิกซูม/เพลงประกอบ (พากย์)'",
+        "ปล่อย + เสียง: ดีพลอยไป Cloudflare Pages เพื่อ URL อัดพากย์ในเบราว์เซอร์หรือ text-to-speech"
+      ]
+    }
+  }
 }

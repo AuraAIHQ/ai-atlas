@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "AI 猜猜我画的啥",
-    "en": "Can the AI guess your doodle?"
+    "en": "Can the AI guess your doodle?",
+    "th": "AI ทายว่าฉันวาดอะไร"
   },
   "category": "drawing",
   "categoryLabel": "🎨 涂鸦成画",
@@ -11,7 +12,9 @@
   "ageBands": "小学+",
   "experiments": 3,
   "summary": {
-    "zh": "随手画，神经网络实时猜你画的是什么。第一次直观看懂“分类”。"
+    "zh": "随手画，神经网络实时猜你画的是什么。第一次直观看懂“分类”。",
+    "en": "Doodle and a neural net guesses in real time. The clearest way to 'get' classification.",
+    "th": "ขีดเขียน แล้วโครงข่ายประสาทเดาแบบเรียลไทม์ วิธีเข้าใจการจำแนกที่ชัดที่สุด"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "数据量与识别的关系"
   ],
   "companion": "cherry-tilt",
-  "status": "review"
+  "status": "review",
+  "body": {
+    "experience": {
+      "zh": "随手画，神经网络实时猜你画的是什么。第一次直观看懂“分类”——AI 怎么把一团线条认成“猫”。",
+      "en": "Doodle freely and a neural network guesses what you're drawing in real time. The most intuitive way to 'get' classification — how AI reads a tangle of lines as 'cat.'",
+      "th": "ขีดเขียนอิสระ แล้วโครงข่ายประสาทเดาว่าคุณวาดอะไรแบบเรียลไทม์ วิธีเข้าใจ 'การจำแนก' ที่ชัดที่สุด — AI อ่านเส้นยุ่ง ๆ เป็น 'แมว' ได้อย่างไร"
+    },
+    "principle": {
+      "zh": "这是最经典的图像分类。训练时模型看过几百万张人类涂鸦，每张带标签。它学的不是背下每张图，而是从大量例子总结出模式：猫大概有尖耳朵、胡须、圆脸。你画的时候，它把你的线条和这些模式比对，输出一个概率“80% 像猫、10% 像狗”，选最高的当答案。所以它边画边猜、越画越准。也因此，你画得太抽象或它没见过，就会猜歪。AI 不认识“猫”，它只是见过特别多猫的涂鸦，学会了“像不像”。",
+      "en": "This is the classic image classification. In training, the model saw millions of human doodles, each labeled. It doesn't memorize images — it distills patterns from many examples: cats tend to have pointy ears, whiskers, a round face. As you draw, it compares your lines to those patterns and outputs a probability ('80% cat, 10% dog') and picks the top. So it guesses as you draw, getting surer with more strokes. And if you're too abstract or it hasn't seen your thing, it guesses wrong. AI doesn't know 'cat' — it has seen a great many cat doodles and learned 'how alike.'",
+      "th": "นี่คือการจำแนกภาพคลาสสิก ตอนฝึก โมเดลเห็นภาพขีดเขียนของมนุษย์หลายล้านภาพ แต่ละภาพมีป้าย มันไม่ท่องจำภาพ แต่กลั่นรูปแบบจากตัวอย่างจำนวนมาก: แมวมักหูแหลม มีหนวด หน้ากลม เมื่อคุณวาด มันเทียบเส้นกับรูปแบบเหล่านั้นแล้วให้ความน่าจะเป็น ('แมว 80% หมา 10%') เลือกสูงสุด จึงเดาไปพลางวาดไปพลาง แม่นขึ้นเมื่อเส้นมากขึ้น ถ้านามธรรมไปหรือไม่เคยเห็นก็เดาผิด AI ไม่รู้จัก 'แมว' แต่เห็นภาพแมวมามากจนเรียนรู้ 'ความคล้าย'"
+    },
+    "learn": {
+      "zh": [
+        "模型学到的是“模式”，不是“记忆”",
+        "它会在哪翻车、为什么（没见过的、太抽象的）——AI 的边界",
+        "数据量与识别准确率的关系（所有 AI 的共同规律）"
+      ],
+      "en": [
+        "A model learns 'patterns,' not 'memories'",
+        "Where and why it fails (unseen, too abstract) — the limits of AI",
+        "How data volume relates to accuracy (a rule shared by all AI)"
+      ],
+      "th": [
+        "โมเดลเรียน 'รูปแบบ' ไม่ใช่ 'ความจำ'",
+        "มันพลาดตรงไหนและทำไม (ไม่เคยเห็น นามธรรมไป) — ขอบเขตของ AI",
+        "ปริมาณข้อมูลสัมพันธ์กับความแม่น (กฎร่วมของ AI ทั้งหมด)"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：直接玩 quickdraw.withgoogle.com，感受“边画边猜”",
+        "看数据：Quick, Draw! 公开了 5000 万+ 涂鸦数据集",
+        "自己训一个：用这些数据 + 一个简单 CNN，几十行代码",
+        "不想写代码：用 Teachable Machine 自己画几类当场训练，同一原理"
+      ],
+      "en": [
+        "Fastest: just play quickdraw.withgoogle.com and feel 'guess as you draw'",
+        "See the data: Quick, Draw! released 50M+ doodles as an open dataset",
+        "Train your own: those doodles + a simple CNN, a few dozen lines",
+        "No code: use Teachable Machine to draw a few classes and train on the spot — same idea"
+      ],
+      "th": [
+        "เร็วที่สุด: เล่น quickdraw.withgoogle.com สัมผัส 'เดาไปวาดไป'",
+        "ดูข้อมูล: Quick, Draw! เปิดชุดข้อมูลภาพขีดเขียน 50 ล้าน+",
+        "ฝึกเอง: ข้อมูลนั้น + CNN ง่าย ๆ ไม่กี่สิบบรรทัด",
+        "ไม่โค้ด: ใช้ Teachable Machine วาดไม่กี่คลาสแล้วฝึกทันที หลักการเดียวกัน"
+      ]
+    }
+  }
 }
