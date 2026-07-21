@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "用身体控制游戏",
-    "en": "Control a game with your body"
+    "en": "Control a game with your body",
+    "th": "ใช้ร่างกายคุมเกม"
   },
   "category": "mini-game",
   "categoryLabel": "🕹 做个小游戏",
@@ -11,7 +12,9 @@
   "ageBands": "初中→大专",
   "experiments": 4,
   "summary": {
-    "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。"
+    "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。",
+    "en": "Train a pose/gesture model and control a character with your body via webcam.",
+    "th": "ฝึกโมเดลท่าทาง แล้วคุมตัวละครด้วยร่างกายผ่านเว็บแคม"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "实时性与准确率的权衡"
   ],
   "companion": "cherry-run",
-  "status": "draft"
+  "status": "draft",
+  "body": {
+    "experience": {
+      "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色——你抬手，屏幕里的小人也抬手。第一次让“身体”变成手柄。",
+      "en": "Train a pose/gesture model and control a game character with your webcam — you raise your arm, the on-screen figure raises its arm. Your body becomes the controller.",
+      "th": "ฝึกโมเดลท่าทาง แล้วคุมตัวละครในเกมด้วยเว็บแคม — คุณยกแขน ตัวละครบนจอก็ยกแขน ร่างกายกลายเป็นจอย"
+    },
+    "principle": {
+      "zh": "摄像头看到的是一堆像素，怎么变成“你在抬手”？姿态识别模型（如 PoseNet / MoveNet）已经学会从画面里找出人体的关键点——头、肩、肘、腕、膝……输出它们的坐标（就是封面那个 cyan 骨架）。有了这些坐标，剩下的就是普通编程：如果手腕高于肩膀，就让游戏角色跳。所以这张卡把两件事接起来：AI 负责“看懂身体”，你写的规则负责“身体怎么控制游戏”。",
+      "en": "The webcam sees a bunch of pixels — how does that become 'you raised your arm'? A pose model (like PoseNet / MoveNet) has learned to find body keypoints in the frame — head, shoulders, elbows, wrists, knees — and outputs their coordinates (that cyan skeleton on the cover). With those coordinates, the rest is ordinary code: if the wrist is above the shoulder, make the character jump. This card wires two things together: AI 'understands the body,' and your rules decide 'how the body controls the game.'",
+      "th": "เว็บแคมเห็นแค่พิกเซลจำนวนมาก แล้วกลายเป็น 'คุณยกแขน' ได้อย่างไร? โมเดลท่าทาง (เช่น PoseNet / MoveNet) เรียนรู้ที่จะหาจุดสำคัญของร่างกายในภาพ — หัว ไหล่ ศอก ข้อมือ เข่า — แล้วส่งพิกัดออกมา (โครงกระดูกสีฟ้าบนปก) เมื่อมีพิกัดแล้ว ที่เหลือคือโค้ดธรรมดา: ถ้าข้อมืออยู่สูงกว่าไหล่ ให้ตัวละครกระโดด การ์ดนี้เชื่อมสองอย่าง: AI 'เข้าใจร่างกาย' และกฎที่คุณเขียน 'ให้ร่างกายคุมเกม'"
+    },
+    "learn": {
+      "zh": [
+        "姿态识别的输入输出：画面进 → 关键点坐标出",
+        "把模型接进游戏循环：坐标 → 规则 → 动作",
+        "实时性与准确率的权衡：卡顿 vs 精准，怎么取舍"
+      ],
+      "en": [
+        "A pose model's input/output: frame in → keypoint coordinates out",
+        "Wiring the model into a game loop: coordinates → rules → actions",
+        "The real-time vs accuracy trade-off: lag vs precision"
+      ],
+      "th": [
+        "อินพุต/เอาต์พุตของโมเดลท่าทาง: ภาพเข้า → พิกัดจุดสำคัญออก",
+        "ต่อโมเดลเข้ากับลูปเกม: พิกัด → กฎ → การกระทำ",
+        "สมดุลเรียลไทม์กับความแม่น: หน่วง vs แม่นยำ"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：Teachable Machine 选“Pose Project”，摆几个姿势各拍一批，训练",
+        "写代码：用 ml5.js 的 bodyPose（基于 TF.js），几十行拿到关键点坐标",
+        "接游戏：坐标 → 判断动作 → 控制 p5.js 里的小人（见 particle-play 卡打基础）",
+        "需要：一个浏览器 + 摄像头；ml5/TF.js 全在本地跑，无需服务器"
+      ],
+      "en": [
+        "Fastest: Teachable Machine → 'Pose Project', capture a batch per pose, train",
+        "Write code: ml5.js bodyPose (on TF.js) gives you keypoint coordinates in a few dozen lines",
+        "Wire a game: coordinates → detect action → control a p5.js figure (build basics on the particle-play card)",
+        "You need: a browser + a webcam; ml5/TF.js run entirely locally, no server"
+      ],
+      "th": [
+        "เร็วที่สุด: Teachable Machine เลือก 'Pose Project' ถ่ายท่าละชุด แล้วฝึก",
+        "เขียนโค้ด: ml5.js bodyPose (บน TF.js) ให้พิกัดจุดสำคัญในไม่กี่สิบบรรทัด",
+        "ต่อเกม: พิกัด → ตรวจการกระทำ → คุมตัวละคร p5.js (ปูพื้นจากการ์ด particle-play)",
+        "ต้องมี: เบราว์เซอร์ + เว็บแคม ml5/TF.js รันในเครื่องล้วน ไม่ต้องมีเซิร์ฟเวอร์"
+      ]
+    }
+  }
 }

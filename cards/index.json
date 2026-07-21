@@ -282,7 +282,8 @@
       "slug": "webcam-controller",
       "title": {
         "zh": "用身体控制游戏",
-        "en": "Control a game with your body"
+        "en": "Control a game with your body",
+        "th": "ใช้ร่างกายคุมเกม"
       },
       "category": "mini-game",
       "categoryLabel": "🕹 做个小游戏",
@@ -290,7 +291,9 @@
       "ageBands": "初中→大专",
       "experiments": 4,
       "summary": {
-        "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。"
+        "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。",
+        "en": "Train a pose/gesture model and control a character with your body via webcam.",
+        "th": "ฝึกโมเดลท่าทาง แล้วคุมตัวละครด้วยร่างกายผ่านเว็บแคม"
       },
       "playground": {
         "url": "https://teachablemachine.withgoogle.com"
