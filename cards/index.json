@@ -233,7 +233,8 @@
       "slug": "teach-cat-or-dog",
       "title": {
         "zh": "5 分钟教它认猫狗",
-        "en": "Teach it cats vs dogs in 5 min"
+        "en": "Teach it cats vs dogs in 5 min",
+        "th": "สอนมันแยกแมวกับหมาใน 5 นาที"
       },
       "category": "train-your-own",
       "categoryLabel": "🤖 训练你自己的 AI",
@@ -241,7 +242,9 @@
       "ageBands": "小学→职校",
       "experiments": 3,
       "summary": {
-        "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。"
+        "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。",
+        "en": "Give a webcam a few examples and train your own image classifier in minutes.",
+        "th": "ให้ตัวอย่างผ่านเว็บแคมไม่กี่ภาพ แล้วฝึกตัวจำแนกภาพของคุณเองในไม่กี่นาที"
       },
       "playground": {
         "url": "https://teachablemachine.withgoogle.com"

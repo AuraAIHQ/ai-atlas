@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "5 分钟教它认猫狗",
-    "en": "Teach it cats vs dogs in 5 min"
+    "en": "Teach it cats vs dogs in 5 min",
+    "th": "สอนมันแยกแมวกับหมาใน 5 นาที"
   },
   "category": "train-your-own",
   "categoryLabel": "🤖 训练你自己的 AI",
@@ -11,7 +12,9 @@
   "ageBands": "小学→职校",
   "experiments": 3,
   "summary": {
-    "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。"
+    "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。",
+    "en": "Give a webcam a few examples and train your own image classifier in minutes.",
+    "th": "ให้ตัวอย่างผ่านเว็บแคมไม่กี่ภาพ แล้วฝึกตัวจำแนกภาพของคุณเองในไม่กี่นาที"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "导出模型接进网页"
   ],
   "companion": "doris-think",
-  "status": "draft"
+  "status": "draft",
+  "body": {
+    "experience": {
+      "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。5 分钟，你就“训练”出了一个属于自己的 AI——第一次亲手体会“训练”是怎么回事。",
+      "en": "Show a webcam a few examples and train your own image classifier, then watch it judge live. In 5 minutes you've 'trained' an AI of your own — the first hands-on feel of what training means.",
+      "th": "ให้เว็บแคมดูตัวอย่างไม่กี่ภาพ แล้วฝึกตัวจำแนกภาพของคุณเอง ดูมันตัดสินแบบเรียลไทม์ ใน 5 นาทีคุณก็ 'ฝึก' AI ของตัวเองได้ — สัมผัสความหมายของการฝึกด้วยมือตัวเองครั้งแรก"
+    },
+    "principle": {
+      "zh": "“训练”到底在做什么？你给每一类（猫 / 狗）几十张例子，模型不是记住每张图，而是慢慢调整内部成千上万个“旋钮”（参数），直到它能把猫的照片和狗的照片分到两边。Teachable Machine 用了一个已经见过海量图片的现成模型打底（迁移学习），所以你只需要教它“你这几类的区别”，几十个例子就够。判断时，它给每类一个概率，选最高的。关键真相：例子给得越均衡、越有代表性，它学得越准；给偏了，它就带着你的偏见。",
+      "en": "What does 'training' actually do? You give each class (cat / dog) a few dozen examples; the model doesn't memorize each image — it slowly tunes thousands of internal 'knobs' (parameters) until it can sort cat photos from dog photos. Teachable Machine starts from a model that has already seen millions of images (transfer learning), so you only teach it 'the difference between your classes' — a few dozen examples is enough. To judge, it gives each class a probability and picks the highest. The key truth: the more balanced and representative your examples, the better it learns; feed it skewed data and it inherits your bias.",
+      "th": "'การฝึก' ทำอะไรจริง ๆ? คุณให้แต่ละคลาส (แมว / หมา) ตัวอย่างหลายสิบภาพ โมเดลไม่ได้จำแต่ละภาพ แต่ค่อย ๆ ปรับ 'ปุ่ม' ภายในนับพัน (พารามิเตอร์) จนแยกภาพแมวออกจากภาพหมาได้ Teachable Machine เริ่มจากโมเดลที่เคยเห็นภาพหลายล้านแล้ว (transfer learning) คุณจึงแค่สอน 'ความต่างของคลาสคุณ' ไม่กี่สิบภาพก็พอ เวลาตัดสิน มันให้ความน่าจะเป็นแต่ละคลาสแล้วเลือกสูงสุด ความจริงสำคัญ: ตัวอย่างยิ่งสมดุลและเป็นตัวแทน ยิ่งเรียนแม่น ถ้าป้อนข้อมูลเอนเอียง มันก็รับอคติของคุณมา"
+    },
+    "learn": {
+      "zh": [
+        "“训练”到底在做什么（调参数，不是背图）",
+        "样本少 / 偏了会怎样——数据偏见的第一课",
+        "迁移学习：站在一个见多识广的模型肩上，所以几十个例子就够"
+      ],
+      "en": [
+        "What 'training' really does (tuning parameters, not memorizing)",
+        "What happens with few or skewed samples — a first lesson in data bias",
+        "Transfer learning: standing on a well-traveled model, so a few dozen examples suffice"
+      ],
+      "th": [
+        "'การฝึก' ทำอะไรจริง ๆ (ปรับพารามิเตอร์ ไม่ใช่ท่องจำ)",
+        "ตัวอย่างน้อยหรือเอนเอียงจะเป็นอย่างไร — บทเรียนแรกเรื่องอคติข้อมูล",
+        "transfer learning: ยืนบนไหล่โมเดลที่เห็นมามาก จึงใช้ตัวอย่างไม่กี่สิบก็พอ"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：Teachable Machine 选“Image Project”，每类用摄像头拍几十张，点训练",
+        "导出模型（TF.js），用 ml5.js 嵌进自己的网页实时识别",
+        "换个题目：良品/次品、手势、垃圾分类——同一个流程",
+        "需要：一个浏览器 + 摄像头；训练和运行都在本地，无需服务器"
+      ],
+      "en": [
+        "Fastest: Teachable Machine → 'Image Project', capture a few dozen shots per class, click Train",
+        "Export the model (TF.js) and embed it in your own page with ml5.js for live recognition",
+        "Change the task: good/defect, gestures, recycling sorting — same workflow",
+        "You need: a browser + a webcam; training and running are both local, no server"
+      ],
+      "th": [
+        "เร็วที่สุด: Teachable Machine เลือก 'Image Project' ถ่ายหลายสิบภาพต่อคลาส กดฝึก",
+        "ส่งออกโมเดล (TF.js) แล้วฝังในหน้าเว็บด้วย ml5.js เพื่อรู้จำสด",
+        "เปลี่ยนโจทย์: ดี/เสีย ท่าทาง แยกขยะ — เวิร์กโฟลว์เดียวกัน",
+        "ต้องมี: เบราว์เซอร์ + เว็บแคม ฝึกและรันในเครื่อง ไม่ต้องมีเซิร์ฟเวอร์"
+      ]
+    }
+  }
 }
