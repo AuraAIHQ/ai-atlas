@@ -29,7 +29,7 @@
     "把它接到一个真实动作上"
   ],
   "companion": "cherry-smile",
-  "status": "draft",
+  "status": "review",
   "body": {
     "experience": {
       "zh": "训练一个声音模型：拍手、吹口哨触发不同动作。原来声音也能被“学会”——你给几个例子，它就分得清。",

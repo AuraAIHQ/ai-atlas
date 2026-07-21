@@ -29,7 +29,7 @@
     "如何减少一本正经地胡说"
   ],
   "companion": "doris-search",
-  "status": "draft",
+  "status": "review",
   "body": {
     "experience": {
       "zh": "上传 PDF、笔记，做一个基于你自己资料回答的问答机器人。理解 RAG——让 AI“先查你的资料，再回答”。",

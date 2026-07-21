@@ -29,7 +29,7 @@
     "导出模型接进网页"
   ],
   "companion": "doris-think",
-  "status": "draft",
+  "status": "review",
   "body": {
     "experience": {
       "zh": "用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。5 分钟，你就“训练”出了一个属于自己的 AI——第一次亲手体会“训练”是怎么回事。",

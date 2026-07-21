@@ -29,7 +29,7 @@
     "实时性与准确率的权衡"
   ],
   "companion": "cherry-run",
-  "status": "draft",
+  "status": "review",
   "body": {
     "experience": {
       "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色——你抬手，屏幕里的小人也抬手。第一次让“身体”变成手柄。",
