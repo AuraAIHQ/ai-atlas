@@ -1,0 +1,30 @@
+{
+  "slug": "particle-play",
+  "schema": 1,
+  "title": {
+    "zh": "让图形动起来",
+    "en": "Make shapes come alive"
+  },
+  "category": "animation",
+  "categoryLabel": "🎬 做个动画",
+  "difficulty": "入门",
+  "ageBands": "初中→大学",
+  "experiments": 3,
+  "summary": {
+    "zh": "用几行创意代码，让粒子、线条随机地动起来——第一次感受“代码即画笔”。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://editor.p5js.org"
+  },
+  "source": {
+    "repo": "https://github.com/processing/p5.js"
+  },
+  "takeaways": [
+    "随机数 + 循环 = 生成式动画",
+    "draw() 每帧重画的心智模型",
+    "改一个参数，画面就变"
+  ],
+  "companion": "cherry-curious",
+  "status": "draft"
+}

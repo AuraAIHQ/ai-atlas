@@ -1,0 +1,30 @@
+{
+  "slug": "webcam-controller",
+  "schema": 1,
+  "title": {
+    "zh": "用身体控制游戏",
+    "en": "Control a game with your body"
+  },
+  "category": "mini-game",
+  "categoryLabel": "🕹 做个小游戏",
+  "difficulty": "进阶",
+  "ageBands": "初中→大专",
+  "experiments": 4,
+  "summary": {
+    "zh": "训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://teachablemachine.withgoogle.com"
+  },
+  "source": {
+    "repo": "https://github.com/ml5js/ml5-library"
+  },
+  "takeaways": [
+    "姿态识别的输入输出",
+    "把模型接进游戏循环",
+    "实时性与准确率的权衡"
+  ],
+  "companion": "cherry-run",
+  "status": "draft"
+}

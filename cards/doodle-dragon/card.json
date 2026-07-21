@@ -1,0 +1,30 @@
+{
+  "slug": "doodle-dragon",
+  "schema": 1,
+  "title": {
+    "zh": "涂鸦变神龙",
+    "en": "Doodle to dragon"
+  },
+  "category": "drawing",
+  "categoryLabel": "🎨 涂鸦成画",
+  "difficulty": "入门",
+  "ageBands": "小学→高中",
+  "experiments": 4,
+  "summary": {
+    "zh": "画一条歪歪扭扭的龙，AI 把它补成一张精致插画。理解 sketch→image。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion"
+  },
+  "source": {
+    "repo": "https://github.com/replicate/scribble-diffusion"
+  },
+  "takeaways": [
+    "草图作为“条件”引导生成（ControlNet）",
+    "prompt 控风格、草图控构图",
+    "AI 的“想象”从哪来"
+  ],
+  "companion": "cherry-smile",
+  "status": "draft"
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "prompt-to-clip",
+  "schema": 1,
+  "title": {
+    "zh": "一句话变成动画短片",
+    "en": "A sentence becomes a clip"
+  },
+  "category": "animation",
+  "categoryLabel": "🎬 做个动画",
+  "difficulty": "入门",
+  "ageBands": "初中→大学",
+  "experiments": 3,
+  "summary": {
+    "zh": "输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning"
+  },
+  "source": {
+    "repo": "https://huggingface.co/spaces/multimodalart/stable-video-diffusion"
+  },
+  "takeaways": [
+    "prompt 如何影响运动与画面",
+    "扩散模型 + 运动模块的直觉",
+    "可 Duplicate Space 自己跑"
+  ],
+  "companion": "doris-surprise",
+  "status": "draft"
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "roleplay-tutor",
+  "schema": 1,
+  "title": {
+    "zh": "随身口语陪练",
+    "en": "A roleplay language tutor"
+  },
+  "category": "chatbot",
+  "categoryLabel": "💬 造个聊天助手",
+  "difficulty": "入门",
+  "ageBands": "高中→大学 / 老师",
+  "experiments": 4,
+  "summary": {
+    "zh": "做一个会角色扮演的聊天机器人：它是巴黎咖啡馆服务员，只用简单法语跟你对话并纠错。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://aistudio.google.com"
+  },
+  "source": {
+    "repo": "https://github.com/vercel/ai"
+  },
+  "takeaways": [
+    "system prompt 决定“人设”",
+    "如何让它纠错而不打断",
+    "语言老师的减负用法"
+  ],
+  "companion": "doris-smile",
+  "status": "draft"
+}

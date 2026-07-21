@@ -1,0 +1,30 @@
+{
+  "slug": "kids-art-gallery",
+  "schema": 1,
+  "title": {
+    "zh": "给孩子办一场线上画展",
+    "en": "An online gallery for your kid's art"
+  },
+  "category": "build-an-idea",
+  "categoryLabel": "✨ 帮你完成一个想法",
+  "difficulty": "入门",
+  "ageBands": "有孩子的家庭",
+  "experiments": 4,
+  "summary": {
+    "zh": "把孩子的画拍下来，十分钟做一个会发光、能旋转、带网址的在线画廊；可配文字甚至配音。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://aistudio.google.com"
+  },
+  "source": {
+    "repo": "https://github.com/Nutlope/llamacoder"
+  },
+  "takeaways": [
+    "把照片变成一个可分享的作品集",
+    "加灯光 / 旋转 / 配音的进阶",
+    "让孩子自己逐幅讲解"
+  ],
+  "companion": "cherry-smile",
+  "status": "draft"
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "quick-draw-guess",
+  "schema": 1,
+  "title": {
+    "zh": "AI 猜猜我画的啥",
+    "en": "Can the AI guess your doodle?"
+  },
+  "category": "drawing",
+  "categoryLabel": "🎨 涂鸦成画",
+  "difficulty": "入门",
+  "ageBands": "小学+",
+  "experiments": 3,
+  "summary": {
+    "zh": "随手画，神经网络实时猜你画的是什么。第一次直观看懂“分类”。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://quickdraw.withgoogle.com"
+  },
+  "source": {
+    "repo": "https://github.com/googlecreativelab/quickdraw-dataset"
+  },
+  "takeaways": [
+    "模型从海量涂鸦里学到了什么",
+    "它会在哪翻车、为什么",
+    "数据量与识别的关系"
+  ],
+  "companion": "cherry-tilt",
+  "status": "draft"
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "chat-with-your-pdf",
+  "schema": 1,
+  "title": {
+    "zh": "和你的资料对话",
+    "en": "Chat with your own docs"
+  },
+  "category": "chatbot",
+  "categoryLabel": "💬 造个聊天助手",
+  "difficulty": "进阶",
+  "ageBands": "大专→大学 / 老师",
+  "experiments": 3,
+  "summary": {
+    "zh": "上传 PDF/笔记，做一个基于你自己资料回答的问答机器人。理解 RAG。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://aistudio.google.com"
+  },
+  "source": {
+    "repo": "https://github.com/AlaGrine/RAG_chatabot_with_Langchain"
+  },
+  "takeaways": [
+    "为什么要“检索再回答”",
+    "切片 / 向量 / 召回的直觉",
+    "如何减少一本正经地胡说"
+  ],
+  "companion": "doris-search",
+  "status": "draft"
+}

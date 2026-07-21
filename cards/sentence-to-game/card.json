@@ -1,0 +1,30 @@
+{
+  "slug": "sentence-to-game",
+  "schema": 1,
+  "title": {
+    "zh": "一句话生成小游戏",
+    "en": "A sentence becomes a game"
+  },
+  "category": "mini-game",
+  "categoryLabel": "🕹 做个小游戏",
+  "difficulty": "入门",
+  "ageBands": "初中→大专",
+  "experiments": 3,
+  "summary": {
+    "zh": "描述一个游戏，AI 生成一个能玩的网页游戏 + 素材。你来当设计师。"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "url": "https://rosebud.ai"
+  },
+  "source": {
+    "repo": "https://github.com/phaserjs/phaser"
+  },
+  "takeaways": [
+    "把想法拆成“规则 + 素材 + 关卡”",
+    "AI 生成后你怎么改",
+    "导出 Phaser 继续做"
+  ],
+  "companion": "doris-smile",
+  "status": "draft"
+}

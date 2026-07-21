@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ai-atlas card",
+  "type": "object",
+  "required": ["slug", "title", "category", "difficulty", "experiments", "summary", "playground"],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "schema": { "type": "integer" },
+    "title": { "type": "object", "properties": { "zh": {"type":"string"}, "en": {"type":"string"} }, "required": ["zh"] },
+    "category": { "type": "string", "enum": ["animation","drawing","mini-game","train-your-own","chatbot","build-an-idea","data-viz"] },
+    "categoryLabel": { "type": "string" },
+    "difficulty": { "type": "string", "enum": ["入门","进阶","高级"] },
+    "ageBands": { "type": "string" },
+    "experiments": { "type": "integer", "minimum": 1 },
+    "summary": { "type": "object", "properties": { "zh": {"type":"string"}, "en": {"type":"string"} }, "required": ["zh"] },
+    "cover": { "type": "string" },
+    "playground": { "type": "object", "properties": { "url": {"type":"string"} } },
+    "source": { "type": "object", "properties": { "repo": {"type":"string"} } },
+    "takeaways": { "type": "array", "items": { "type": "string" } },
+    "companion": { "type": "string", "description": "Doris/Cherry 表情 slug" },
+    "status": { "type": "string", "enum": ["draft","review","published"] }
+  }
+}
