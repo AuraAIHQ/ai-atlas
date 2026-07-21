@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "随身口语陪练",
-    "en": "A roleplay language tutor"
+    "en": "A roleplay language tutor",
+    "th": "ติวเตอร์สนทนาสวมบทบาท"
   },
   "category": "chatbot",
   "categoryLabel": "💬 造个聊天助手",
@@ -11,7 +12,9 @@
   "ageBands": "高中→大学 / 老师",
   "experiments": 4,
   "summary": {
-    "zh": "做一个会角色扮演的聊天机器人：它是巴黎咖啡馆服务员，只用简单法语跟你对话并纠错。"
+    "zh": "做一个会角色扮演的聊天机器人：它是巴黎咖啡馆服务员，只用简单法语跟你对话并纠错。",
+    "en": "A chatbot that role-plays a scene and corrects you live — a pocket speaking partner.",
+    "th": "แชตบอตที่สวมบทบาทและแก้ให้คุณทันที — คู่ฝึกพูดพกพา"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "语言老师的减负用法"
   ],
   "companion": "doris-smile",
-  "status": "draft"
+  "status": "draft",
+  "body": {
+    "experience": {
+      "zh": "做一个会角色扮演的聊天机器人：它是巴黎咖啡馆的服务员，只用简单法语跟你对话，还随时纠错。一个随身、不害羞、无限耐心的口语陪练。",
+      "en": "Build a chatbot that role-plays: it's a Parisian café waiter, speaks only simple French with you, and corrects you as you go. A pocket speaking partner — patient, never judging.",
+      "th": "สร้างแชตบอตที่สวมบทบาท: เป็นบริกรร้านกาแฟปารีส คุยกับคุณด้วยภาษาฝรั่งเศสง่าย ๆ และแก้ให้ทันที คู่ฝึกพูดพกพา อดทน ไม่ตัดสิน"
+    },
+    "principle": {
+      "zh": "这张卡的魔法全在一句 system prompt（系统指令）。大模型本身会说很多语言、能扮演角色；你在对话最前面给它一段“设定”——“你是巴黎咖啡馆服务员，只用 A2 级别的简单法语，我说错就先自然回应、再用括号温和纠正”——它就会照着这个人设一直演下去。所以你没训练任何模型，只是用语言给它“装了个角色”。这就是提示工程（prompt engineering）：把你要的行为，写成清楚的指令。",
+      "en": "The magic here is one system prompt. A big model already speaks many languages and can play roles; you put a 'setup' at the very front of the chat — 'You are a Parisian café waiter, use only simple A2 French, and when I make a mistake, respond naturally first, then gently correct me in parentheses' — and it stays in character. You trained nothing; you 'installed a role' with words. That's prompt engineering: writing the behavior you want as a clear instruction.",
+      "th": "เวทมนตร์อยู่ที่ system prompt เดียว โมเดลใหญ่พูดได้หลายภาษาและสวมบทบาทได้อยู่แล้ว คุณใส่ 'การตั้งค่า' ไว้หน้าสุดของแชต — 'คุณเป็นบริกรร้านกาแฟปารีส ใช้ภาษาฝรั่งเศสง่าย ๆ ระดับ A2 เมื่อฉันผิดให้ตอบอย่างเป็นธรรมชาติก่อน แล้วแก้เบา ๆ ในวงเล็บ' — มันก็อยู่ในบทบาทตลอด คุณไม่ได้เทรนอะไร แต่ 'ติดตั้งบทบาท' ด้วยคำพูด นั่นคือ prompt engineering: เขียนพฤติกรรมที่ต้องการเป็นคำสั่งชัดเจน"
+    },
+    "learn": {
+      "zh": [
+        "system prompt 决定“人设”和规则（AI 的行为是写出来的）",
+        "如何让它纠错而不打断对话（先回应、再温和提示）",
+        "语言老师的减负用法：给每个学生一个专属陪练角色"
+      ],
+      "en": [
+        "The system prompt sets the persona and rules (AI behavior is written)",
+        "How to make it correct you without breaking the flow (respond first, then gently note)",
+        "A teacher's time-saver: give every student a personal practice partner"
+      ],
+      "th": [
+        "system prompt กำหนดบุคลิกและกฎ (พฤติกรรม AI ถูกเขียนขึ้น)",
+        "ทำให้มันแก้โดยไม่ขัดจังหวะ (ตอบก่อน แล้วค่อยเตือนเบา ๆ)",
+        "ตัวช่วยของครู: ให้นักเรียนทุกคนมีคู่ฝึกส่วนตัว"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：Google AI Studio，把上面那段“设定”粘进 system instruction，直接开聊",
+        "接进网页：用 Vercel AI SDK 的 useChat + streamText，几十行做个聊天页",
+        "换角色/语言只要改 system prompt：面试官、导游、辩论对手…",
+        "需要：一个 LLM（可接我们的体验卡 token）；纯前端做界面即可"
+      ],
+      "en": [
+        "Fastest: Google AI Studio — paste the 'setup' into the system instruction and start chatting",
+        "Wire a web app: Vercel AI SDK's useChat + streamText, a chat page in a few dozen lines",
+        "Swap role/language by editing the system prompt: interviewer, tour guide, debate partner…",
+        "You need: an LLM (can run on your card tokens); the UI is pure front-end"
+      ],
+      "th": [
+        "เร็วที่สุด: Google AI Studio วาง 'การตั้งค่า' ลงใน system instruction แล้วเริ่มคุย",
+        "ต่อเว็บ: Vercel AI SDK useChat + streamText ทำหน้าแชตในไม่กี่สิบบรรทัด",
+        "เปลี่ยนบทบาท/ภาษาแค่แก้ system prompt: ผู้สัมภาษณ์ ไกด์ คู่โต้วาที…",
+        "ต้องมี: LLM (ใช้โทเคนบัตรของเราได้) ส่วนหน้าเป็นฝั่งไคลเอนต์ล้วน"
+      ]
+    }
+  }
 }
