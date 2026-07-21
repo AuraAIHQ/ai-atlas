@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "让图形动起来",
-    "en": "Make shapes come alive"
+    "en": "Make shapes come alive",
+    "th": "ทำให้รูปทรงเคลื่อนไหว"
   },
   "category": "animation",
   "categoryLabel": "🎬 做个动画",
@@ -11,11 +12,15 @@
   "ageBands": "初中→大学",
   "experiments": 3,
   "summary": {
-    "zh": "用几行创意代码，让粒子、线条随机地动起来——第一次感受“代码即画笔”。"
+    "zh": "用几行创意代码，让粒子、线条随机地动起来——第一次感受“代码即画笔”。",
+    "en": "A few lines of creative code and particles come alive — feel 'code as paintbrush.'",
+    "th": "โค้ดสร้างสรรค์ไม่กี่บรรทัด อนุภาคก็มีชีวิต — สัมผัส 'โค้ดคือพู่กัน'"
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://editor.p5js.org"
+    "url": "https://editor.p5js.org",
+    "embed": "/play/particle-play",
+    "selfHosted": true
   },
   "source": {
     "repo": "https://github.com/processing/p5.js"
@@ -26,5 +31,54 @@
     "改一个参数，画面就变"
   ],
   "companion": "cherry-curious",
-  "status": "review"
+  "status": "review",
+  "body": {
+    "experience": {
+      "zh": "用几行创意代码，让粒子、线条随机地动起来——第一次感受“代码即画笔”。这张卡的 playground 就在本页，是我们自己写的：拖动就能画，还能切到万花筒模式。",
+      "en": "A few lines of creative code make particles and lines move at random — feel “code as paintbrush” for the first time. The playground on this page is our own: drag to draw, and switch to kaleidoscope mode.",
+      "th": "โค้ดสร้างสรรค์ไม่กี่บรรทัดทำให้อนุภาคและเส้นเคลื่อนไหวแบบสุ่ม — สัมผัส “โค้ดคือพู่กัน” เป็นครั้งแรก playground บนหน้านี้เราเขียนเอง: ลากเพื่อวาด และสลับไปโหมดคาไลโดสโคปได้"
+    },
+    "principle": {
+      "zh": "这张卡不靠 AI 模型，靠创意编程（creative coding）的核心心智模型：画布每一帧都重画一次，一秒 60 帧连起来就是动画；再用“随机数 + 循环”给成百上千个点各一点随机，简单规则叠起来就“涌现”出复杂图案。你不是画出每个粒子，而是定几条规则、让规则自己长出画面——这也是理解“生成”的最好起点。",
+      "en": "This card isn't an AI model — it's the core mental model of creative coding: the canvas repaints every frame, and 60 frames a second becomes animation; then “random + loop” gives hundreds of dots each a little randomness, and simple rules stacked together make complex patterns “emerge.” You don't draw each particle — you set a few rules and let them grow the picture. That's the best starting point for understanding “generative.”",
+      "th": "การ์ดนี้ไม่ใช่โมเดล AI แต่คือแก่นความคิดของ creative coding: แคนวาสวาดใหม่ทุกเฟรม 60 เฟรมต่อวินาทีกลายเป็นแอนิเมชัน แล้ว “สุ่ม + วนลูป” ให้จุดนับร้อยมีความสุ่มเล็กน้อย กฎง่าย ๆ ซ้อนกันก็ทำให้เกิดลวดลายซับซ้อน คุณไม่ได้วาดทุกอนุภาค แต่ตั้งกฎไม่กี่ข้อแล้วปล่อยให้มันงอกเป็นภาพ — จุดเริ่มต้นที่ดีที่สุดในการเข้าใจคำว่า “generative”"
+    },
+    "learn": {
+      "zh": [
+        "随机数 + 循环 = 生成式动画（涌现的直觉）",
+        "每帧重画的心智模型（动画到底是什么）",
+        "改一个参数画面就变——参数化思维，是玩 AI 生成的地基"
+      ],
+      "en": [
+        "Random + loop = generative animation (the intuition of emergence)",
+        "The 'repaint every frame' model (what animation really is)",
+        "Change one parameter, the picture changes — parametric thinking underlies AI generation"
+      ],
+      "th": [
+        "สุ่ม + ลูป = แอนิเมชันเชิงกำเนิด (สัญชาตญาณของการเกิดขึ้นเอง)",
+        "โมเดล 'วาดใหม่ทุกเฟรม' (แอนิเมชันคืออะไรจริง ๆ)",
+        "เปลี่ยนพารามิเตอร์เดียว ภาพก็เปลี่ยน — คิดแบบพารามิเตอร์คือรากฐานของการสร้างด้วย AI"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "先玩本页的 playground（我们自建，纯前端 canvas，零依赖）",
+        "想自己写：打开 p5.js Web Editor，改 draw() 里的数字，实时看变化",
+        "做个粒子系统：用数组存很多“粒子对象”，每帧更新位置+画出来",
+        "进阶：p5.js + ml5.js 就能把动画接上 AI（姿态/声音控制），见 webcam-controller 卡"
+      ],
+      "en": [
+        "Play the playground on this page (ours, pure client-side canvas, zero dependencies)",
+        "Write your own: open the p5.js Web Editor, tweak numbers in draw(), watch it change live",
+        "Build a particle system: store many 'particle objects' in an array, update + draw each frame",
+        "Go further: p5.js + ml5.js connects animation to AI (pose/sound control) — see the webcam-controller card"
+      ],
+      "th": [
+        "เล่น playground บนหน้านี้ (ของเรา แคนวาสฝั่งไคลเอนต์ล้วน ไม่มี dependency)",
+        "เขียนเอง: เปิด p5.js Web Editor ปรับตัวเลขใน draw() ดูการเปลี่ยนแปลงสด",
+        "สร้างระบบอนุภาค: เก็บ 'ออบเจกต์อนุภาค' หลายตัวใน array อัปเดต+วาดทุกเฟรม",
+        "ไปต่อ: p5.js + ml5.js เชื่อมแอนิเมชันเข้ากับ AI (ควบคุมด้วยท่าทาง/เสียง) ดูการ์ด webcam-controller"
+      ]
+    }
+  }
 }

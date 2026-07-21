@@ -18,8 +18,7 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion",
-    "embed": "https://myn0908-s2i-artwork-sketch-to-image-diffusion.hf.space"
+    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion"
   },
   "source": {
     "repo": "https://github.com/replicate/scribble-diffusion"
