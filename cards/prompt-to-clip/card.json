@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "一句话变成动画短片",
-    "en": "A sentence becomes a clip"
+    "en": "A sentence becomes a clip",
+    "th": "ประโยคเดียวเป็นคลิป"
   },
   "category": "animation",
   "categoryLabel": "🎬 做个动画",
@@ -11,7 +12,9 @@
   "ageBands": "初中→大学",
   "experiments": 3,
   "summary": {
-    "zh": "输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。"
+    "zh": "输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。",
+    "en": "Type a sentence, get a few-second animated clip. See how text-to-video works.",
+    "th": "พิมพ์ประโยคเดียว ได้คลิปแอนิเมชันไม่กี่วินาที ดูว่า text-to-video ทำงานอย่างไร"
   },
   "cover": "screenshot.png",
   "playground": {
@@ -26,5 +29,54 @@
     "可 Duplicate Space 自己跑"
   ],
   "companion": "doris-surprise",
-  "status": "draft"
+  "status": "draft",
+  "body": {
+    "experience": {
+      "zh": "输入一句话，AI 生成几秒的动画短片。第一次看懂“文生视频”是怎么回事——从一句描述，长出会动的画面。",
+      "en": "Type a sentence and AI generates a few-second animated clip. Understand text-to-video for the first time — a moving scene grows from a single description.",
+      "th": "พิมพ์ประโยคหนึ่ง แล้ว AI สร้างคลิปแอนิเมชันไม่กี่วินาที เข้าใจ text-to-video เป็นครั้งแรก — ฉากเคลื่อนไหวงอกจากคำบรรยายเดียว"
+    },
+    "principle": {
+      "zh": "文生视频建立在文生图之上：扩散模型能从噪声“去噪”出一张符合描述的图；视频再多一件事——让连续的帧之间保持一致、动作连贯。像 AnimateDiff 这类做法，是在图像模型上加一个“运动模块”，学会“同一个场景下一帧该怎么动”。所以你看封面：从满屏噪点，一帧帧长出一棵会摇的树。prompt 里的动词和描述，决定了它怎么动。",
+      "en": "Text-to-video builds on text-to-image: a diffusion model 'denoises' noise into a picture matching your words; video adds one thing — keeping consecutive frames consistent and the motion coherent. Approaches like AnimateDiff add a 'motion module' on top of an image model that learns 'how the next frame should move in the same scene.' That's the film strip on the cover: from pure noise, a swaying tree grows frame by frame. The verbs and description in your prompt decide how it moves.",
+      "th": "text-to-video ต่อยอดจาก text-to-image: โมเดล diffusion 'ลดรบกวน' จากสัญญาณรบกวนเป็นภาพที่ตรงกับคำของคุณ วิดีโอเพิ่มอีกหนึ่งอย่าง — ทำให้เฟรมต่อเนื่องสอดคล้องและการเคลื่อนไหวลื่นไหล วิธีอย่าง AnimateDiff เพิ่ม 'โมดูลการเคลื่อนไหว' บนโมเดลภาพ ที่เรียนรู้ว่า 'เฟรมถัดไปควรขยับอย่างไรในฉากเดียวกัน' นั่นคือฟิล์มบนปก: จากสัญญาณรบกวนล้วน ต้นไม้ไหว ๆ งอกทีละเฟรม คำกริยาและคำบรรยายใน prompt กำหนดว่ามันจะขยับอย่างไร"
+    },
+    "learn": {
+      "zh": [
+        "prompt 如何影响运动与画面（动词很关键）",
+        "扩散模型 + 运动模块的直觉：图会画了，再教它“动得连贯”",
+        "为什么视频比图更难、更慢、更贵（要保持时间上的一致）"
+      ],
+      "en": [
+        "How the prompt shapes motion and scene (verbs matter)",
+        "The intuition of diffusion + a motion module: it can paint, now teach it coherent motion",
+        "Why video is harder, slower, costlier than images (temporal consistency)"
+      ],
+      "th": [
+        "prompt กำหนดการเคลื่อนไหวและฉากอย่างไร (คำกริยาสำคัญ)",
+        "สัญชาตญาณของ diffusion + โมดูลการเคลื่อนไหว: วาดได้แล้ว สอนให้ขยับต่อเนื่อง",
+        "ทำไมวิดีโอยาก ช้า และแพงกว่าภาพ (ความสอดคล้องตามเวลา)"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：打开 AnimateDiff-Lightning 或 Stable Video Diffusion 的 Space，输入 prompt 出片",
+        "可 Duplicate 那个 Space 到自己账号免费跑（若原 Space 挂了就复制一个）",
+        "进阶：Python diffusers 的 AnimateDiffPipeline / StableVideoDiffusion 本地跑",
+        "需要：能跑扩散视频的后端（HF / 本地 GPU），比图更吃算力"
+      ],
+      "en": [
+        "Fastest: open the AnimateDiff-Lightning or Stable Video Diffusion Space and prompt it",
+        "Duplicate that Space to your own account to run it free (clone one if the original is down)",
+        "Go deeper: Python diffusers AnimateDiffPipeline / StableVideoDiffusion locally",
+        "You need: a backend that runs video diffusion (HF / local GPU) — heavier than images"
+      ],
+      "th": [
+        "เร็วที่สุด: เปิด Space ของ AnimateDiff-Lightning หรือ Stable Video Diffusion แล้วป้อน prompt",
+        "Duplicate Space ไปบัญชีตัวเองเพื่อรันฟรี (ถ้าตัวเดิมล่มก็ก็อปใหม่)",
+        "ลงลึก: Python diffusers AnimateDiffPipeline / StableVideoDiffusion ในเครื่อง",
+        "ต้องมี: แบ็กเอนด์ที่รัน video diffusion (HF / GPU) ใช้พลังมากกว่าภาพ"
+      ]
+    }
+  }
 }

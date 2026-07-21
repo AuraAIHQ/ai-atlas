@@ -109,7 +109,8 @@
       "slug": "prompt-to-clip",
       "title": {
         "zh": "一句话变成动画短片",
-        "en": "A sentence becomes a clip"
+        "en": "A sentence becomes a clip",
+        "th": "ประโยคเดียวเป็นคลิป"
       },
       "category": "animation",
       "categoryLabel": "🎬 做个动画",
@@ -117,7 +118,9 @@
       "ageBands": "初中→大学",
       "experiments": 3,
       "summary": {
-        "zh": "输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。"
+        "zh": "输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。",
+        "en": "Type a sentence, get a few-second animated clip. See how text-to-video works.",
+        "th": "พิมพ์ประโยคเดียว ได้คลิปแอนิเมชันไม่กี่วินาที ดูว่า text-to-video ทำงานอย่างไร"
       },
       "playground": {
         "url": "https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning"
