@@ -3,7 +3,8 @@
   "schema": 1,
   "title": {
     "zh": "涂鸦变神龙",
-    "en": "Doodle to dragon"
+    "en": "Doodle to dragon",
+    "th": "วาดมังกรจากลายเส้น"
   },
   "category": "drawing",
   "categoryLabel": "🎨 涂鸦成画",
@@ -11,11 +12,14 @@
   "ageBands": "小学→高中",
   "experiments": 4,
   "summary": {
-    "zh": "画一条歪歪扭扭的龙，AI 把它补成一张精致插画。理解 sketch→image。"
+    "zh": "画一条歪歪扭扭的龙，AI 把它补成一张精致插画。理解 sketch→image。",
+    "en": "Draw a wobbly little dragon and AI turns it into a polished illustration.",
+    "th": "วาดมังกรเบี้ยว ๆ แล้ว AI เปลี่ยนมันเป็นภาพประกอบที่สวยงาม"
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion"
+    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion",
+    "embed": "https://myn0908-s2i-artwork-sketch-to-image-diffusion.hf.space"
   },
   "source": {
     "repo": "https://github.com/replicate/scribble-diffusion"
@@ -26,5 +30,54 @@
     "AI 的“想象”从哪来"
   ],
   "companion": "cherry-smile",
-  "status": "review"
+  "status": "review",
+  "body": {
+    "experience": {
+      "zh": "画一条歪歪扭扭的龙，AI 把它补成一张精致插画。你负责“想画什么、什么构图”，AI 负责“画得好看”。",
+      "en": "Draw a wobbly little dragon, and AI turns it into a polished illustration. You decide what to draw and how to frame it; AI makes it look good.",
+      "th": "วาดมังกรเบี้ยว ๆ แล้ว AI จะเปลี่ยนมันเป็นภาพประกอบที่สวยงาม คุณกำหนดว่าจะวาดอะไรและจัดวางอย่างไร ส่วน AI ทำให้มันออกมาสวย"
+    },
+    "principle": {
+      "zh": "这是 sketch→image（草图生成图像），核心是扩散模型 + ControlNet。扩散模型从一张纯噪声开始，一步步“去噪”成图；ControlNet 把你的草图当成“结构条件”，在每一步把画面钉在你的构图上。所以：草图定构图，文字定风格。AI 不是“描”你的线，而是在你的线约束下重新想象一遍。",
+      "en": "This is sketch→image, powered by a diffusion model plus ControlNet. The diffusion model starts from pure noise and 'denoises' step by step into a picture; ControlNet treats your sketch as a structural condition that pins the composition to your lines at every step. So the sketch sets the composition and the words set the style. AI doesn't 'trace' your lines — it re-imagines the scene under their constraint.",
+      "th": "นี่คือ sketch→image ขับเคลื่อนด้วยโมเดล diffusion และ ControlNet โมเดล diffusion เริ่มจากสัญญาณรบกวนล้วน ๆ แล้วค่อย ๆ 'ลดรบกวน' จนกลายเป็นภาพ ส่วน ControlNet ใช้ภาพร่างของคุณเป็นเงื่อนไขโครงสร้างที่ตรึงองค์ประกอบให้ตรงกับเส้นของคุณในทุกขั้น ดังนั้นภาพร่างกำหนดองค์ประกอบ และคำสั่งกำหนดสไตล์ AI ไม่ได้ 'ลอก' เส้นของคุณ แต่จินตนาการฉากใหม่ภายใต้ข้อจำกัดของเส้นนั้น"
+    },
+    "learn": {
+      "zh": [
+        "草图作为“条件”引导生成（ControlNet 的直觉）",
+        "prompt 控风格、草图控构图——两个旋钮分开调",
+        "AI 的“想象”从哪来：它在补它见过的模式，也因此会自作主张"
+      ],
+      "en": [
+        "A sketch as a 'condition' that guides generation (the ControlNet intuition)",
+        "Prompt controls style, sketch controls composition — two separate knobs",
+        "Where AI's 'imagination' comes from: it fills in patterns it has seen, and so it improvises"
+      ],
+      "th": [
+        "ภาพร่างเป็น 'เงื่อนไข' ที่นำทางการสร้างภาพ (สัญชาตญาณของ ControlNet)",
+        "คำสั่งคุมสไตล์ ภาพร่างคุมองค์ประกอบ — สองปุ่มปรับแยกกัน",
+        "จินตนาการของ AI มาจากไหน: มันเติมรูปแบบที่เคยเห็น จึงด้นสดเองได้"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：打开右侧 playground，在画布上涂鸦 + 写 prompt 直接出图",
+        "看代码：clone replicate/scribble-diffusion（Next.js 调 Replicate 的 ControlNet 模型），填 API token 即可本地跑",
+        "进阶：Python diffusers + sd-controlnet-scribble，把草图当 control image 出图",
+        "需要：一个扩散后端（Replicate / HF / 本地 GPU）+ 一个画布前端"
+      ],
+      "en": [
+        "Fastest: use the playground here — doodle on the canvas, write a prompt, get an image",
+        "Read the code: clone replicate/scribble-diffusion (Next.js calling a ControlNet model on Replicate); add an API token and run it locally",
+        "Go deeper: Python diffusers + sd-controlnet-scribble, feed your sketch as the control image",
+        "You need: a diffusion backend (Replicate / HF / local GPU) + a canvas front-end"
+      ],
+      "th": [
+        "เร็วที่สุด: ใช้ playground ทางขวา วาดบนแคนวาส เขียนคำสั่ง แล้วได้ภาพ",
+        "ดูโค้ด: clone replicate/scribble-diffusion (Next.js เรียกโมเดล ControlNet บน Replicate) ใส่ API token แล้วรันในเครื่องได้",
+        "ลงลึก: Python diffusers + sd-controlnet-scribble ป้อนภาพร่างเป็น control image",
+        "ต้องมี: แบ็กเอนด์ diffusion (Replicate / HF / GPU ในเครื่อง) + ส่วนหน้าที่เป็นแคนวาส"
+      ]
+    }
+  }
 }
