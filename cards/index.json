@@ -184,7 +184,7 @@
         "repo": "https://github.com/phaserjs/phaser"
       },
       "companion": "doris-smile",
-      "status": "draft"
+      "status": "review"
     },
     {
       "slug": "sound-trigger",
