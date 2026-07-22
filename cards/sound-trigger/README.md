@@ -1,6 +1,6 @@
 # 拍手就触发 · Clap to trigger
 
-> 🤖 训练你自己的 AI · 入门 · 适合：小学→职校 · 🔗 外部 playground：https://teachablemachine.withgoogle.com（第三方托管，可用性以对方为准）
+> 🤖 训练你自己的 AI · 入门 · 适合：小学→职校 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 训练一个声音模型：拍手、吹口哨触发不同动作。声音也能被“学会”。
 
@@ -58,7 +58,7 @@
 
 **要点：** 声音如何变成特征 · 阈值与误触发 · 把它接到一个真实动作上
 
-[▶ 去 playground](https://teachablemachine.withgoogle.com) · [源码/参考](https://github.com/tensorflow/tfjs-examples)
+[▶ 去 playground](/play/sound-trigger) · [源码/参考](https://github.com/tensorflow/tfjs-examples)
 
 <details>
 <summary><b>English</b></summary>

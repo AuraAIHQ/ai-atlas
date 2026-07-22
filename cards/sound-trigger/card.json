@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://teachablemachine.withgoogle.com"
+    "embed": "/play/sound-trigger",
+    "selfHosted": true,
+    "url": "/play/sound-trigger",
+    "ref": "https://teachablemachine.withgoogle.com"
   },
   "source": {
     "repo": "https://github.com/tensorflow/tfjs-examples"

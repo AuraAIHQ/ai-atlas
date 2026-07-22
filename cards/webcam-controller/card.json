@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://teachablemachine.withgoogle.com"
+    "embed": "/play/webcam-controller",
+    "selfHosted": true,
+    "url": "/play/webcam-controller",
+    "ref": "https://teachablemachine.withgoogle.com"
   },
   "source": {
     "repo": "https://github.com/ml5js/ml5-library"

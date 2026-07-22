@@ -1,6 +1,6 @@
 # 用身体控制游戏 · Control a game with your body
 
-> 🕹 做个小游戏 · 进阶 · 适合：初中→大专 · 🔗 外部 playground：https://teachablemachine.withgoogle.com（第三方托管，可用性以对方为准）
+> 🕹 做个小游戏 · 进阶 · 适合：初中→大专 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。
 
@@ -60,7 +60,7 @@
 
 **要点：** 姿态识别的输入输出 · 把模型接进游戏循环 · 实时性与准确率的权衡
 
-[▶ 去 playground](https://teachablemachine.withgoogle.com) · [源码/参考](https://github.com/ml5js/ml5-library)
+[▶ 去 playground](/play/webcam-controller) · [源码/参考](https://github.com/ml5js/ml5-library)
 
 <details>
 <summary><b>English</b></summary>
