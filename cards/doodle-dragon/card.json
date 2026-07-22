@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion"
+    "embed": "/play/doodle-dragon",
+    "selfHosted": true,
+    "url": "/play/doodle-dragon",
+    "ref": "https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion"
   },
   "source": {
     "repo": "https://github.com/replicate/scribble-diffusion"

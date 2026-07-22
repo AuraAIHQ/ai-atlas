@@ -15,7 +15,7 @@
 |---|---|---|---|---|---|
 | text-to-image | 涂鸦成画 | ✅ | 🟢 Modal GPU 跑 SD-Turbo，已上线测过 | —（已自建，样板）| A |
 | particle-play | 动画 | ✅ | 🟡 自建 canvas 页，无模型（本就不需要）| —（够用）| B |
-| doodle-dragon | 涂鸦成画 | ✅ | 🔴 链外部 HF Space `myn0908/S2I-…`（**现 500**）| **Modal 部署 ControlNet-Scribble / SD+涂鸦条件** | A |
+| doodle-dragon | 涂鸦成画 | ✅ | 🟢 **自建 `/play/doodle-dragon`**：Modal ControlNet-Scribble+SD1.5(idoris-doodle)，已部署实测出图 | ✅ 完成 | A |
 | prompt-to-clip | 动画 | ✅ | 🔴 链 `ByteDance/AnimateDiff-Lightning` HF | Modal 部署 AnimateDiff-Lightning（开源权重）| A |
 | teach-cat-or-dog | 训练你自己的 | ✅ | 🟢 **自建 `/play/teach-cat-or-dog`**：浏览器 TF.js + MobileNet + KNN，已上线 | ✅ 完成 | B |
 | sound-trigger | 训练你自己的 | ✅ | 🟢 **自建 `/play/sound-trigger`**：TF.js speech-commands 迁移学习，已上线 | ✅ 完成 | B |
@@ -27,7 +27,7 @@
 | chat-with-your-pdf | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们后端 RAG：embed + 向量库 + 我们的 LLM | C |
 | roleplay-tutor | 聊天助手 | ✅ | 🟢 **自建 `/play/roleplay-tutor`**：Cloudflare Workers AI（llama-3.3-70b）驱动 `/api/chat`，已上线 | ✅ 完成 | C |
 
-**账：13 张里自建 7 张（text-to-image 模型 / particle-play 前端 / teach-cat-or-dog + webcam-controller + sound-trigger + quick-draw-guess 浏览器 ML / roleplay-tutor 自有 LLM）；其余 6 张是外链，需改自建。**
+**账：13 张里自建 8 张（text-to-image + doodle-dragon 两个 Modal GPU / particle-play 前端 / teach-cat-or-dog + webcam-controller + sound-trigger + quick-draw-guess 浏览器 ML / roleplay-tutor 自有 LLM）；其余 5 张是外链，需改自建。**
 
 > 进度：
 > - **B 类 4 张全部自建完成**（浏览器 ML；DoodleNet 权重 ~2MB 已托管到 iDoris assets，不依赖第三方）。

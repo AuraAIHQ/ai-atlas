@@ -1,6 +1,6 @@
 # 涂鸦变神龙 · Doodle to dragon
 
-> 🎨 涂鸦成画 · 入门 · 适合：小学→高中 · 🔗 外部 playground：https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion（第三方托管，可用性以对方为准）
+> 🎨 涂鸦成画 · 入门 · 适合：小学→高中 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 画一条歪歪扭扭的龙，AI 把它补成一张精致插画。理解 sketch→image。
 
@@ -54,7 +54,7 @@
 
 **要点：** 草图作为“条件”引导生成（ControlNet） · prompt 控风格、草图控构图 · AI 的“想象”从哪来
 
-[▶ 去 playground](https://huggingface.co/spaces/myn0908/S2I-Artwork-Sketch-to-Image-Diffusion) · [源码/参考](https://github.com/replicate/scribble-diffusion)
+[▶ 去 playground](/play/doodle-dragon) · [源码/参考](https://github.com/replicate/scribble-diffusion)
 
 <details>
 <summary><b>English</b></summary>
