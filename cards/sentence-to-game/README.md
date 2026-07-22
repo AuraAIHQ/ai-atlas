@@ -1,6 +1,6 @@
 # 一句话生成小游戏 · A sentence becomes a game
 
-> 🕹 做个小游戏 · 入门 · 适合：初中→大专 · 🔗 外部 playground：https://rosebud.ai（第三方托管，可用性以对方为准）
+> 🕹 做个小游戏 · 入门 · 适合：初中→大专 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 描述一个游戏，AI 生成一个能玩的网页游戏 + 素材。你来当设计师。
 
@@ -55,7 +55,7 @@
 
 **要点：** 把想法拆成“规则 + 素材 + 关卡” · AI 生成后你怎么改 · 导出 Phaser 继续做
 
-[▶ 去 playground](https://rosebud.ai) · [源码/参考](https://github.com/phaserjs/phaser)
+[▶ 去 playground](/play/sentence-to-game) · [源码/参考](https://github.com/phaserjs/phaser)
 
 <details>
 <summary><b>English</b></summary>

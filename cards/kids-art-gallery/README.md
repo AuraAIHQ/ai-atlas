@@ -1,6 +1,6 @@
 # 给孩子办一场线上画展 · An online gallery for your kid's art
 
-> ✨ 帮你完成一个想法 · 入门 · 适合：有孩子的家庭 · 🔗 外部 playground：https://aistudio.google.com（第三方托管，可用性以对方为准）
+> ✨ 帮你完成一个想法 · 入门 · 适合：有孩子的家庭 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 把孩子的画拍下来，十分钟做一个会发光、能旋转、带网址的在线画廊；可配文字甚至配音。
 
@@ -54,7 +54,7 @@
 
 **要点：** 把照片变成一个可分享的作品集 · 加灯光 / 旋转 / 配音的进阶 · 让孩子自己逐幅讲解
 
-[▶ 去 playground](https://aistudio.google.com) · [源码/参考](https://github.com/Nutlope/llamacoder)
+[▶ 去 playground](/play/kids-art-gallery) · [源码/参考](https://github.com/Nutlope/llamacoder)
 
 <details>
 <summary><b>English</b></summary>

@@ -1,6 +1,6 @@
 # 十分钟上线你的 Airbnb 房源网站 · Your Airbnb listing site in 10 minutes
 
-> ✨ 帮你完成一个想法 · 入门 · 适合：人人 / Airbnb 房东 · 🔗 外部 playground：https://aistudio.google.com（第三方托管，可用性以对方为准）
+> ✨ 帮你完成一个想法 · 入门 · 适合：人人 / Airbnb 房东 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 有一两间空房出租？房间、照片、评价、周边一页搞定，还能加预订。二维码印名片，客人自己看，不用一条条重发。
 
@@ -52,7 +52,7 @@
 
 **要点：** 把“介绍自己”结构化成一个页面 · 一句话生成 → 你来改文案配图 · 部署上线 + 域名 + 二维码
 
-[▶ 去 playground](https://aistudio.google.com) · [源码/参考](https://github.com/e2b-dev/fragments)
+[▶ 去 playground](/play/ten-minute-website) · [源码/参考](https://github.com/e2b-dev/fragments)
 
 <details>
 <summary><b>English</b></summary>

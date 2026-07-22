@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://aistudio.google.com"
+    "embed": "/play/kids-art-gallery",
+    "selfHosted": true,
+    "url": "/play/kids-art-gallery",
+    "ref": "https://aistudio.google.com"
   },
   "source": {
     "repo": "https://github.com/Nutlope/llamacoder"

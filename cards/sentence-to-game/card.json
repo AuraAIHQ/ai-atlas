@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://rosebud.ai"
+    "embed": "/play/sentence-to-game",
+    "selfHosted": true,
+    "url": "/play/sentence-to-game",
+    "ref": "https://rosebud.ai"
   },
   "source": {
     "repo": "https://github.com/phaserjs/phaser"

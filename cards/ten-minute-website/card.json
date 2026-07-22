@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://aistudio.google.com"
+    "embed": "/play/ten-minute-website",
+    "selfHosted": true,
+    "url": "/play/ten-minute-website",
+    "ref": "https://aistudio.google.com"
   },
   "source": {
     "repo": "https://github.com/e2b-dev/fragments"
