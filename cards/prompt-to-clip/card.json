@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning"
+    "embed": "/play/prompt-to-clip",
+    "selfHosted": true,
+    "url": "/play/prompt-to-clip",
+    "ref": "https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning"
   },
   "source": {
     "repo": "https://huggingface.co/spaces/multimodalart/stable-video-diffusion"

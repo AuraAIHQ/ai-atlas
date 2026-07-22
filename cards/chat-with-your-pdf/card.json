@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://aistudio.google.com"
+    "embed": "/play/chat-with-your-pdf",
+    "selfHosted": true,
+    "url": "/play/chat-with-your-pdf",
+    "ref": "https://aistudio.google.com"
   },
   "source": {
     "repo": "https://github.com/AlaGrine/RAG_chatabot_with_Langchain"

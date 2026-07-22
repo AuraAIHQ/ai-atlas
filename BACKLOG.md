@@ -16,7 +16,7 @@
 | text-to-image | 涂鸦成画 | ✅ | 🟢 Modal GPU 跑 SD-Turbo，已上线测过 | —（已自建，样板）| A |
 | particle-play | 动画 | ✅ | 🟡 自建 canvas 页，无模型（本就不需要）| —（够用）| B |
 | doodle-dragon | 涂鸦成画 | ✅ | 🟢 **自建 `/play/doodle-dragon`**：Modal ControlNet-Scribble+SD1.5(idoris-doodle)，已部署实测出图 | ✅ 完成 | A |
-| prompt-to-clip | 动画 | ✅ | 🔴 链 `ByteDance/AnimateDiff-Lightning` HF | Modal 部署 AnimateDiff-Lightning（开源权重）| A |
+| prompt-to-clip | 动画 | ✅ | 🟢 **自建 `/play/prompt-to-clip`**：Modal AnimateDiff-Lightning(idoris-clip)文生视频→GIF，已实测 | ✅ 完成 | A |
 | teach-cat-or-dog | 训练你自己的 | ✅ | 🟢 **自建 `/play/teach-cat-or-dog`**：浏览器 TF.js + MobileNet + KNN，已上线 | ✅ 完成 | B |
 | sound-trigger | 训练你自己的 | ✅ | 🟢 **自建 `/play/sound-trigger`**：TF.js speech-commands 迁移学习，已上线 | ✅ 完成 | B |
 | webcam-controller | 小游戏 | ✅ | 🟢 **自建 `/play/webcam-controller`**：TF.js MoveNet 姿态，已上线 | ✅ 完成 | B |
@@ -24,13 +24,14 @@
 | sentence-to-game | 小游戏 | ✅ | 🟢 **自建 `/play/sentence-to-game`**：/api/chat 生成 HTML5 canvas 游戏→沙箱 iframe | ✅ 完成 | C |
 | ten-minute-website | 帮你完成想法 | ✅ | 🟢 **自建 `/play/ten-minute-website`**：/api/chat 生成网页→沙箱 iframe | ✅ 完成 | C |
 | kids-art-gallery | 帮你完成想法 | ✅ | 🟢 **自建 `/play/kids-art-gallery`**：/api/chat 生成画廊页→沙箱 iframe | ✅ 完成 | C |
-| chat-with-your-pdf | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们后端 RAG：embed + 向量库 + 我们的 LLM | C |
+| chat-with-your-pdf | 聊天助手 | ✅ | 🟢 **自建 `/play/chat-with-your-pdf`**：/api/embed(bge-m3)+浏览器余弦检索+/api/chat 据实作答 | ✅ 完成 | C |
 | roleplay-tutor | 聊天助手 | ✅ | 🟢 **自建 `/play/roleplay-tutor`**：Cloudflare Workers AI（llama-3.3-70b）驱动 `/api/chat`，已上线 | ✅ 完成 | C |
 
-**账：13 张里自建 11 张；仅剩 2 张外链待改：chat-with-your-pdf(RAG)、prompt-to-clip(文生视频)。**
+**账：13 张全部自建 ✅ —— 不再有任何第三方外链。**
 - Modal GPU：text-to-image、doodle-dragon
 - 浏览器 ML(零成本)：particle-play、teach-cat-or-dog、webcam-controller、sound-trigger、quick-draw-guess
-- 自有 LLM(/api/chat, Workers AI)：roleplay-tutor、ten-minute-website、kids-art-gallery、sentence-to-game
+- 自有 LLM(/api/chat, Workers AI)：roleplay-tutor、ten-minute-website、kids-art-gallery、sentence-to-game、chat-with-your-pdf(RAG，/api/embed bge-m3)
+- Modal 视频：prompt-to-clip(AnimateDiff-Lightning)
 
 > 进度：
 > - **B 类 4 张全部自建完成**（浏览器 ML；DoodleNet 权重 ~2MB 已托管到 iDoris assets，不依赖第三方）。

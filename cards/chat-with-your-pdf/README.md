@@ -1,6 +1,6 @@
 # 和你的资料对话 · Chat with your own docs
 
-> 💬 造个聊天助手 · 进阶 · 适合：大专→大学 / 老师 · 🔗 外部 playground：https://aistudio.google.com（第三方托管，可用性以对方为准）
+> 💬 造个聊天助手 · 进阶 · 适合：大专→大学 / 老师 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 上传 PDF/笔记，做一个基于你自己资料回答的问答机器人。理解 RAG。
 
@@ -59,7 +59,7 @@
 
 **要点：** 为什么要“检索再回答” · 切片 / 向量 / 召回的直觉 · 如何减少一本正经地胡说
 
-[▶ 去 playground](https://aistudio.google.com) · [源码/参考](https://github.com/AlaGrine/RAG_chatabot_with_Langchain)
+[▶ 去 playground](/play/chat-with-your-pdf) · [源码/参考](https://github.com/AlaGrine/RAG_chatabot_with_Langchain)
 
 <details>
 <summary><b>English</b></summary>

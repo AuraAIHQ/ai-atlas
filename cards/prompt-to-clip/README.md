@@ -1,6 +1,6 @@
 # 一句话变成动画短片 · A sentence becomes a clip
 
-> 🎬 做个动画 · 入门 · 适合：初中→大学 · 🔗 外部 playground：https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning（第三方托管，可用性以对方为准）
+> 🎬 做个动画 · 入门 · 适合：初中→大学 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。
 
@@ -54,7 +54,7 @@
 
 **要点：** prompt 如何影响运动与画面 · 扩散模型 + 运动模块的直觉 · 可 Duplicate Space 自己跑
 
-[▶ 去 playground](https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning) · [源码/参考](https://huggingface.co/spaces/multimodalart/stable-video-diffusion)
+[▶ 去 playground](/play/prompt-to-clip) · [源码/参考](https://huggingface.co/spaces/multimodalart/stable-video-diffusion)
 
 <details>
 <summary><b>English</b></summary>
