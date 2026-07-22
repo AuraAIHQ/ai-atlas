@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://aistudio.google.com"
+    "embed": "/play/roleplay-tutor",
+    "selfHosted": true,
+    "url": "/play/roleplay-tutor",
+    "ref": "https://aistudio.google.com"
   },
   "source": {
     "repo": "https://github.com/vercel/ai"

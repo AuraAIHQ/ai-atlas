@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://quickdraw.withgoogle.com"
+    "embed": "/play/quick-draw-guess",
+    "selfHosted": true,
+    "url": "/play/quick-draw-guess",
+    "ref": "https://quickdraw.withgoogle.com"
   },
   "source": {
     "repo": "https://github.com/googlecreativelab/quickdraw-dataset"

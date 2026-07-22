@@ -20,16 +20,19 @@
 | teach-cat-or-dog | 训练你自己的 | ✅ | 🟢 **自建 `/play/teach-cat-or-dog`**：浏览器 TF.js + MobileNet + KNN，已上线 | ✅ 完成 | B |
 | sound-trigger | 训练你自己的 | ✅ | 🟢 **自建 `/play/sound-trigger`**：TF.js speech-commands 迁移学习，已上线 | ✅ 完成 | B |
 | webcam-controller | 小游戏 | ✅ | 🟢 **自建 `/play/webcam-controller`**：TF.js MoveNet 姿态，已上线 | ✅ 完成 | B |
-| quick-draw-guess | 涂鸦成画 | ✅ | 🔴 链 Google Quick Draw | 浏览器端 TF.js 涂鸦分类器（QuickDraw 数据）| B |
+| quick-draw-guess | 涂鸦成画 | ✅ | 🟢 **自建 `/play/quick-draw-guess`**：DoodleNet(345类)权重托管在我们自己 assets，浏览器识别 | ✅ 完成 | B |
 | sentence-to-game | 小游戏 | ✅ | 🔴 链 rosebud.ai | 我们代理的 LLM 生成可玩 HTML/JS 游戏 | C |
 | ten-minute-website | 帮你完成想法 | ✅ | 🔴 链 aistudio.google.com | 我们代理的 LLM 生成网页（草图/描述→HTML）| C |
 | kids-art-gallery | 帮你完成想法 | ✅ | 🔴 链 aistudio.google.com | 我们代理的 LLM 生成画廊页 + 上传图 | C |
 | chat-with-your-pdf | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们后端 RAG：embed + 向量库 + 我们的 LLM | C |
-| roleplay-tutor | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们代理的 LLM 聊天（系统提示做角色/陪练）| C |
+| roleplay-tutor | 聊天助手 | ✅ | 🟢 **自建 `/play/roleplay-tutor`**：Cloudflare Workers AI（llama-3.3-70b）驱动 `/api/chat`，已上线 | ✅ 完成 | C |
 
-**账：13 张里自建 5 张（text-to-image 模型 / particle-play 前端 / teach-cat-or-dog + webcam-controller + sound-trigger 浏览器 ML）；其余 8 张是外链，需改自建。**
+**账：13 张里自建 7 张（text-to-image 模型 / particle-play 前端 / teach-cat-or-dog + webcam-controller + sound-trigger + quick-draw-guess 浏览器 ML / roleplay-tutor 自有 LLM）；其余 6 张是外链，需改自建。**
 
-> 进度：B 类已自建 3 张（teach-cat-or-dog / webcam-controller / sound-trigger，2026-07）。B 类只剩 **quick-draw-guess**（需自托管一个涂鸦分类模型，如 DoodleNet 权重放我们自己的 assets）。之后进 A 类（doodle-dragon Modal）。
+> 进度：
+> - **B 类 4 张全部自建完成**（浏览器 ML；DoodleNet 权重 ~2MB 已托管到 iDoris assets，不依赖第三方）。
+> - **C 类后端已通**：`/api/chat` 走 Cloudflare Workers AI（`env.AI`，无外部 key），默认模型 `@cf/meta/llama-3.3-70b-instruct-fp8-fast`（注意：旧 llama-3.1-8b 已于 2026-05-30 下架）。首张 roleplay-tutor 上线可用，按 token 计费。
+> - 下一步 C 类剩 4 张：ten-minute-website / kids-art-gallery / sentence-to-game（生成→iframe 预览）、chat-with-your-pdf（RAG）。A 类：doodle-dragon（Modal ControlNet，修 500）、prompt-to-clip。
 
 ---
 

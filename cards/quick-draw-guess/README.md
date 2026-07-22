@@ -1,6 +1,6 @@
 # AI 猜猜我画的啥 · Can the AI guess your doodle?
 
-> 🎨 涂鸦成画 · 入门 · 适合：小学+ · 🔗 外部 playground：https://quickdraw.withgoogle.com（第三方托管，可用性以对方为准）
+> 🎨 涂鸦成画 · 入门 · 适合：小学+ · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 随手画，神经网络实时猜你画的是什么。第一次直观看懂“分类”。
 
@@ -55,7 +55,7 @@
 
 **要点：** 模型从海量涂鸦里学到了什么 · 它会在哪翻车、为什么 · 数据量与识别的关系
 
-[▶ 去 playground](https://quickdraw.withgoogle.com) · [源码/参考](https://github.com/googlecreativelab/quickdraw-dataset)
+[▶ 去 playground](/play/quick-draw-guess) · [源码/参考](https://github.com/googlecreativelab/quickdraw-dataset)
 
 <details>
 <summary><b>English</b></summary>

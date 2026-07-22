@@ -1,6 +1,6 @@
 # 随身口语陪练 · A roleplay language tutor
 
-> 💬 造个聊天助手 · 入门 · 适合：高中→大学 / 老师 · 🔗 外部 playground：https://aistudio.google.com（第三方托管，可用性以对方为准）
+> 💬 造个聊天助手 · 入门 · 适合：高中→大学 / 老师 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 做一个会角色扮演的聊天机器人：它是巴黎咖啡馆服务员，只用简单法语跟你对话并纠错。
 
@@ -55,7 +55,7 @@
 
 **要点：** system prompt 决定“人设” · 如何让它纠错而不打断 · 语言老师的减负用法
 
-[▶ 去 playground](https://aistudio.google.com) · [源码/参考](https://github.com/vercel/ai)
+[▶ 去 playground](/play/roleplay-tutor) · [源码/参考](https://github.com/vercel/ai)
 
 <details>
 <summary><b>English</b></summary>
