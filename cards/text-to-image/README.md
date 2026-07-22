@@ -1,6 +1,6 @@
 # 一句话变一张图 · A sentence becomes an image
 
-> 🎨 涂鸦成画 · 入门 · 适合：人人 · 🟢 自建 playground（跑在我们自己的服务器/GPU 上）
+> 🎨 涂鸦成画 · 入门 · 适合：人人 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 输入一句话，AI 当场生成一张图 —— 这张卡的 playground 是我们自己搭的，出图按 token 计量。
 

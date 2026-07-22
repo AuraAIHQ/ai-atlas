@@ -17,7 +17,7 @@
 | particle-play | 动画 | ✅ | 🟡 自建 canvas 页，无模型（本就不需要）| —（够用）| B |
 | doodle-dragon | 涂鸦成画 | ✅ | 🔴 链外部 HF Space `myn0908/S2I-…`（**现 500**）| **Modal 部署 ControlNet-Scribble / SD+涂鸦条件** | A |
 | prompt-to-clip | 动画 | ✅ | 🔴 链 `ByteDance/AnimateDiff-Lightning` HF | Modal 部署 AnimateDiff-Lightning（开源权重）| A |
-| teach-cat-or-dog | 训练你自己的 | ✅ | 🔴 链 Teachable Machine 官网 | **浏览器端 TF.js + MobileNet 迁移学习**（零 GPU 成本）| B |
+| teach-cat-or-dog | 训练你自己的 | ✅ | 🟢 **自建 `/play/teach-cat-or-dog`**：浏览器 TF.js + MobileNet + KNN，已上线 | ✅ 完成 | B |
 | sound-trigger | 训练你自己的 | ✅ | 🔴 链 Teachable Machine 官网 | 浏览器端 TF.js speech-commands | B |
 | webcam-controller | 小游戏 | ✅ | 🔴 链 Teachable Machine 官网 | 浏览器端 TF.js MoveNet 姿态 + p5.js | B |
 | quick-draw-guess | 涂鸦成画 | ✅ | 🔴 链 Google Quick Draw | 浏览器端 TF.js 涂鸦分类器（QuickDraw 数据）| B |
@@ -27,7 +27,9 @@
 | chat-with-your-pdf | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们后端 RAG：embed + 向量库 + 我们的 LLM | C |
 | roleplay-tutor | 聊天助手 | ✅ | 🔴 链 aistudio.google.com | 我们代理的 LLM 聊天（系统提示做角色/陪练）| C |
 
-**账：13 张里目前真正自建的只有 2 张（text-to-image 有模型 / particle-play 纯前端）；其余 11 张是外链，需改自建。**
+**账：13 张里自建 3 张（text-to-image 有模型 / particle-play 纯前端 / teach-cat-or-dog 浏览器 ML）；其余 10 张是外链，需改自建。**
+
+> 进度：B 类首张 teach-cat-or-dog 已自建上线（2026-07）。下一步 sound-trigger / webcam-controller / quick-draw-guess。
 
 ---
 

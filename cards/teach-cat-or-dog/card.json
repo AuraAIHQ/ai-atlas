@@ -18,7 +18,10 @@
   },
   "cover": "screenshot.png",
   "playground": {
-    "url": "https://teachablemachine.withgoogle.com"
+    "embed": "/play/teach-cat-or-dog",
+    "selfHosted": true,
+    "url": "/play/teach-cat-or-dog",
+    "ref": "https://teachablemachine.withgoogle.com"
   },
   "source": {
     "repo": "https://github.com/googlecreativelab/teachablemachine-community"

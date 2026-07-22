@@ -1,6 +1,6 @@
 # 5 分钟教它认猫狗 · Teach it cats vs dogs in 5 min
 
-> 🤖 训练你自己的 AI · 入门 · 适合：小学→职校 · 🔗 外部 playground：https://teachablemachine.withgoogle.com（第三方托管，可用性以对方为准）
+> 🤖 训练你自己的 AI · 入门 · 适合：小学→职校 · 🟢 自建 playground（我们自己的后端 / 你的浏览器里跑，不依赖第三方）
 
 用摄像头给几张例子，训练一个自己的图像分类器，看它实时判断。
 
@@ -57,7 +57,7 @@
 
 **要点：** “训练”到底在做什么 · 样本少 / 偏了会怎样（偏见） · 导出模型接进网页
 
-[▶ 去 playground](https://teachablemachine.withgoogle.com) · [源码/参考](https://github.com/googlecreativelab/teachablemachine-community)
+[▶ 去 playground](/play/teach-cat-or-dog) · [源码/参考](https://github.com/googlecreativelab/teachablemachine-community)
 
 <details>
 <summary><b>English</b></summary>
