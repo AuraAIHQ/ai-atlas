@@ -31,7 +31,7 @@
     "这就是我们自建、可计量的出图后端"
   ],
   "companion": "cherry-smile",
-  "status": "draft",
+  "status": "review",
   "body": {
     "experience": {
       "zh": "输入一句话，AI 当场把它变成一张图。这张卡的 playground 是「我们自己搭的」（跑在我们自己的 GPU 上），出图按 token 计量——所以它是我们自己的，不是外链。",
