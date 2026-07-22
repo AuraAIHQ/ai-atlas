@@ -1,32 +1,178 @@
-# 拍手就触发  ·  Clap to trigger
+# 拍手就触发 · Clap to trigger
 
-> 🤖 训练你自己的 AI · 难度：入门 · 适合：小学→职校 · 约 3 个实验
+> 🤖 训练你自己的 AI · 入门 · 适合：小学→职校 · 🔗 外部 playground：https://teachablemachine.withgoogle.com（第三方托管，可用性以对方为准）
 
-![screenshot](./screenshot.png)
+训练一个声音模型：拍手、吹口哨触发不同动作。声音也能被“学会”。
 
-## 体验（先玩）
-一句话说明你会做出什么，然后去 playground 玩到结果：
-**训练一个声音模型：拍手、吹口哨触发不同动作。声音也能被“学会”。**
+### 🎮 体验
 
-▶ Playground：https://teachablemachine.withgoogle.com
+训练一个声音模型：拍手、吹口哨触发不同动作。原来声音也能被“学会”——你给几个例子，它就分得清。
 
-## 原理（它怎么工作）
-_用人话讲清背后是什么，配一张示意图。别堆术语。_
+### 🧠 原理
 
-TODO：补一段原理说明。
+声音看不见摸不着，AI 怎么会“认”声音？这张卡的核心魔法是：先把声音变成一张图，于是“听声音”就变成了它早就擅长的“看图”。
 
-## 你能学到什么
-- 声音如何变成特征
-- 阈值与误触发
-- 把它接到一个真实动作上
+这张图叫“声谱图”（spectrogram）。你可以把它想成给声音拍的一张 X 光片，或者一张体检报告：横轴是时间（什么时候），纵轴是频率（声音的高低——低音在下、高音在上），某个点越亮表示那个时刻那个频率越响。拍手是“啪”的一下，能量很短、铺得很宽，声谱图上就是一道竖亮条；吹口哨是又细又高的持续音，就是一条细长的亮线；安静则几乎全黑。同一种声音画出来的图，长得都差不多——这正是能被“认”出来的前提。
 
-## 怎么复现（自己做）
-1. 打开参考仓库：https://github.com/tensorflow/tfjs-examples
-2. TODO：一步步 clone / run 的说明。
-3. TODO：需要的工具 / API / key。
+你打开网页选“Audio Project”，麦克风每隔一小段就把刚收到的声音切成一小片、算出它的声谱图。训练时，你录几段拍手、几段口哨、几段安静，分别贴上标签，模型就学“拍手这张图长这样、口哨那张图长那样”。这里同样用了迁移学习：底下有个已经听过大量声音的现成模型打底，你只需教它你这几类的差别，几段例子就够。
 
-## 陪伴形象
-本卡配套形象：`cherry-smile`（Doris / Cherry 的一个表情，可做数字徽章 / NFT）。
+识别时，当前这一小片声音同样变成声谱图，送进模型，它输出“现在更像拍手 92%、口哨 5%、安静 3%”。你再设一个阈值——比如超过 80% 才算数——超过就触发动作：页面变色、播个音效、控制小游戏。阈值就是灵敏度旋钮：调太低，一点杂音就乱触发；调太高，你真拍手了它还没反应。所以它并不是“听懂”了拍手，而是学会了“拍手这张声音照片”长什么样，再看当前这张够不够像。
+
+再具体一点：为什么“变成图”这一步这么关键？因为 AI 本来就有一整套认图的看家本领（就是前面猫狗卡里那种视觉模型），只要把看不见的声音翻译成看得见的声谱图，这套本领就能直接拿来用，不用为声音另起炉灶。这也解释了为什么拍手、口哨这种“形状鲜明”的声音特别好认，而两种很像的说话声就难分——因为它们的声谱图长得太像了。你在家训练一个“听到拍手就开灯”的小玩具，从录音、训练到识别，全程只在这台电脑里发生，麦克风收到的声音一秒都不会离开你的浏览器。
+
+和另外两张一样，这一切——切片、变声谱图、训练、识别——全在你自己浏览器里由 TensorFlow.js 完成。你的麦克风声音不上传、不留云端，断网也能用。
+
+### 🗺 架构流程图
+
+```
+[你的麦克风] 持续收声
+      │ 每隔一小段切成一小片声音
+      ▼
+[变成声谱图 spectrogram]  横轴=时间 纵轴=频率 亮=响
+      │ 于是“听声音” → “看图”
+      ▼
+┌────────── 训练时 ──────────┐   ┌────────── 识别时 ──────────┐
+│ 录几段：拍手/口哨/安静     │   │ 当前这片的声谱图进来      │
+│ 贴标签，模型学每张图样子   │   │      ▼                     │
+│ （迁移学习：站在现成模型上）│   │ 模型打分                  │
+└────────────────────────────┘   │ 拍手92% / 口哨5% / 安静3%  │
+                                  │      ▼ 过阈值（如 >80%）？ │
+                                  │ 触发：变色 / 播声 / 控游戏 │
+                                  └────────────────────────────┘
+
+全程在【你自己的浏览器】（TensorFlow.js）—— 不联网、不上云
+```
+
+### 🎓 学到什么
+
+- 声音如何变成特征（声谱图：把声音变成图）
+- 阈值与误触发：太敏感会乱触发，太钝会漏
+- 把它接到一个真实动作上（识别→触发的完整链路）
+
+### 🔧 怎么复现
+
+- 最快：Teachable Machine 选“Audio Project”，录几段拍手/口哨/安静，当场训练
+- 导出模型（TF.js），用 ml5.js 或 TF.js 在网页里实时识别
+- 加动作：识别到“拍手”就让页面变色/播声音/控制一个小游戏
+- 需要：一个浏览器 + 麦克风；全程无需服务器
+
+**要点：** 声音如何变成特征 · 阈值与误触发 · 把它接到一个真实动作上
+
+[▶ 去 playground](https://teachablemachine.withgoogle.com) · [源码/参考](https://github.com/tensorflow/tfjs-examples)
+
+<details>
+<summary><b>English</b></summary>
+
+### 🎮 Experience
+
+Train a sound model: a clap or a whistle triggers different actions. Sound can be 'learned' too — give it a few examples and it tells them apart.
+
+### 🧠 How it works
+
+Sound is invisible and untouchable — how can AI 'recognize' it? The core magic of this card: first turn sound into a picture, so 'listening' becomes something it's already good at — 'looking at images.'
+
+That picture is called a 'spectrogram.' Think of it as a medical chart: the horizontal axis is time (when), the vertical axis is frequency (pitch — low tones at the bottom, high at the top), and the brighter a spot, the louder that frequency at that moment. A clap is a sharp 'snap' — very short energy spread very wide — so on the spectrogram it's a bright vertical bar; a whistle is a thin, high, sustained tone — a long thin bright line; quiet is almost all black. The same kind of sound draws a similar-looking picture — which is exactly what makes it 'recognizable.'
+
+You open the page, pick 'Audio Project,' and the microphone chops the incoming sound into little slices every short moment and computes each slice's spectrogram. To train, you record a few claps, a few whistles, a few quiets, label them, and the model learns 'a clap's picture looks like this, a whistle's like that.' Transfer learning again: underneath is a ready-made model that has already heard huge amounts of sound; you only teach it the difference between your classes, so a few examples are enough.
+
+To recognize, the current little slice also becomes a spectrogram, goes into the model, and it outputs 'right now it's more like clap 92%, whistle 5%, quiet 3%.' You set a threshold — say only above 80% counts — and past it, it triggers an action: change the page color, play a sound, control a mini-game. The threshold is the sensitivity knob: too low and any noise fires it; too high and it ignores your real clap. So it doesn't 'understand' a clap — it learned what a clap's 'sound photo' looks like, then checks whether the current one looks similar enough.
+
+To be more concrete: why is turning sound 'into a picture' so crucial? Because AI already has a whole toolkit for reading images (the same kind of vision model as the cat/dog card); once you translate invisible sound into a visible spectrogram, that toolkit applies directly — no need to build something new for sound. It also explains why sharp-shaped sounds like a clap or a whistle are especially easy to recognize, while two similar speaking voices are hard to tell apart — their spectrograms look too alike. Train a little 'clap turns on the light' toy at home, and from recording to training to recognizing, everything happens only on this computer; the sound the microphone hears never leaves your browser for even a second.
+
+Like the other two cards, all of this — slicing, making spectrograms, training, recognizing — is done by TensorFlow.js inside your own browser. Your microphone sound is never uploaded, never kept in the cloud, and it works offline too.
+
+### 🗺 How it flows
+
+```
+[Your microphone] listening continuously
+      │ chop into a little slice every short moment
+      ▼
+[Turn into a spectrogram]  x=time, y=frequency, bright=loud
+      │ so 'listening' -> 'looking at a picture'
+      ▼
+┌────────── While training ─────────┐   ┌───────── While recognizing ─────────┐
+│ Record a few: clap/whistle/quiet  │   │ Current slice's spectrogram comes in │
+│ Label them; model learns each look│   │      ▼                              │
+│ (transfer learning: on a ready    │   │ Model scores                        │
+│  model)                           │   │ clap 92% / whistle 5% / quiet 3%    │
+└───────────────────────────────────┘   │      ▼ past threshold (e.g. >80%)?  │
+                                         │ Trigger: color / sound / mini-game  │
+                                         └─────────────────────────────────────┘
+
+All in [your own browser] (TensorFlow.js) — no internet, no cloud
+```
+
+### 🎓 What you learn
+
+- How sound becomes features (spectrograms: turning sound into images)
+- Thresholds and false triggers: too sensitive fires randomly, too dull misses
+- Wire it to a real action (the full recognize → trigger loop)
+
+### 🔧 How to reproduce
+
+- Fastest: Teachable Machine → 'Audio Project', record claps/whistles/quiet, train on the spot
+- Export the model (TF.js) and run real-time recognition in a page with ml5.js or TF.js
+- Add an action: on 'clap', change the page color / play a sound / control a mini-game
+- You need: a browser + a microphone; no server at all
+
+</details>
+
+<details>
+<summary><b>ภาษาไทย</b></summary>
+
+### 🎮 ประสบการณ์
+
+ฝึกโมเดลเสียง: ปรบมือหรือผิวปากสั่งงานต่างกัน เสียงก็ 'เรียนรู้' ได้ — ให้ตัวอย่างไม่กี่ตัว มันก็แยกออก
+
+### 🧠 หลักการ
+
+เสียงมองไม่เห็นจับไม่ได้ แล้ว AI 'รู้จำ' มันได้อย่างไร? มนตร์หลักของการ์ดนี้คือ: แปลงเสียงเป็นภาพก่อน 'การฟัง' จึงกลายเป็นสิ่งที่มันเก่งอยู่แล้ว — 'การดูภาพ'
+
+ภาพนั้นเรียกว่า 'spectrogram' นึกถึงมันเหมือนผลตรวจสุขภาพ: แกนนอนคือเวลา (เมื่อไร) แกนตั้งคือความถี่ (เสียงสูงต่ำ — เสียงต่ำอยู่ล่าง เสียงสูงอยู่บน) จุดไหนสว่างกว่าแปลว่าความถี่นั้นในขณะนั้นดังกว่า การปรบมือคือ 'ป้าบ' สั้น ๆ พลังงานสั้นมากแต่กระจายกว้าง บน spectrogram จึงเป็นแท่งสว่างแนวตั้ง การผิวปากเป็นเสียงสูงบางต่อเนื่อง เป็นเส้นสว่างเรียวยาว ความเงียบเกือบดำสนิท เสียงชนิดเดียวกันวาดออกมาหน้าตาคล้ายกัน — นั่นแหละคือเหตุผลที่ 'รู้จำ' ได้
+
+คุณเปิดหน้าเว็บ เลือก 'Audio Project' ไมโครโฟนจะหั่นเสียงที่เข้ามาเป็นชิ้นเล็ก ๆ ทุกช่วงสั้น ๆ แล้วคำนวณ spectrogram ของแต่ละชิ้น ตอนฝึก คุณอัดปรบมือไม่กี่ครั้ง ผิวปากไม่กี่ครั้ง เงียบไม่กี่ครั้ง ติดป้าย แล้วโมเดลเรียนว่า 'ภาพปรบมือหน้าตาแบบนี้ ภาพผิวปากแบบนั้น' เป็น transfer learning อีกเช่นกัน: ข้างใต้มีโมเดลสำเร็จรูปที่เคยได้ยินเสียงจำนวนมหาศาล คุณเพียงสอนความต่างของคลาสคุณ ไม่กี่ตัวอย่างก็พอ
+
+ตอนรู้จำ ชิ้นเสียงปัจจุบันก็กลายเป็น spectrogram เข้าโมเดล แล้วมันให้ผล 'ตอนนี้คล้ายปรบมือ 92% ผิวปาก 5% เงียบ 3%' คุณตั้งเกณฑ์ — เช่นเกิน 80% จึงนับ — เกินแล้วก็สั่งงาน: เปลี่ยนสีหน้าเว็บ เล่นเสียง คุมเกม เกณฑ์คือปุ่มความไว: ต่ำไปเสียงรบกวนนิดเดียวก็ลั่น สูงไปคุณปรบมือจริงมันก็เมิน มันจึงไม่ได้ 'เข้าใจ' การปรบมือ แต่เรียนรู้ว่า 'ภาพเสียง' ของการปรบมือหน้าตาเป็นอย่างไร แล้วเช็กว่าภาพปัจจุบันคล้ายพอไหม
+
+ให้เจาะจงขึ้น: ทำไมขั้น 'แปลงเป็นภาพ' จึงสำคัญนัก? เพราะ AI มีชุดเครื่องมืออ่านภาพครบอยู่แล้ว (โมเดลภาพชนิดเดียวกับการ์ดแมว/หมา) เมื่อแปลเสียงที่มองไม่เห็นเป็น spectrogram ที่มองเห็นได้ ชุดเครื่องมือนี้ก็ใช้ได้ทันที ไม่ต้องสร้างของใหม่สำหรับเสียง ยังอธิบายด้วยว่าทำไมเสียงรูปทรงชัดเจนอย่างปรบมือหรือผิวปากจึงรู้จำง่ายเป็นพิเศษ ขณะที่เสียงพูดสองเสียงที่คล้ายกันแยกยาก — เพราะ spectrogram ของมันหน้าตาเหมือนกันเกินไป ลองฝึกของเล่น 'ปรบมือแล้วเปิดไฟ' ที่บ้าน ตั้งแต่อัด ฝึก จนรู้จำ ทุกอย่างเกิดบนเครื่องนี้เท่านั้น เสียงที่ไมค์ได้ยินไม่ออกจากเบราว์เซอร์แม้แต่วินาทีเดียว
+
+เช่นเดียวกับอีกสองการ์ด ทั้งหมดนี้ — หั่นชิ้น ทำ spectrogram ฝึก รู้จำ — ทำโดย TensorFlow.js ภายในเบราว์เซอร์ของคุณเอง เสียงจากไมโครโฟนไม่เคยถูกอัปโหลด ไม่เก็บบนคลาวด์ และใช้ได้แม้ตัดเน็ต
+
+### 🗺 แผนผังการทำงาน
+
+```
+[ไมโครโฟนของคุณ] ฟังต่อเนื่อง
+      │ หั่นเป็นชิ้นเล็ก ๆ ทุกช่วงสั้น ๆ
+      ▼
+[แปลงเป็น spectrogram]  x=เวลา y=ความถี่ สว่าง=ดัง
+      │ 'การฟัง' จึงกลายเป็น 'การดูภาพ'
+      ▼
+┌────────── ตอนฝึก ──────────┐   ┌────────── ตอนรู้จำ ──────────┐
+│ อัดไม่กี่ชิ้น: ปรบมือ/ผิวปาก/เงียบ │   │ spectrogram ของชิ้นปัจจุบันเข้ามา │
+│ ติดป้าย โมเดลเรียนหน้าตาแต่ละภาพ │   │      ▼                        │
+│ (transfer learning: บนโมเดลสำเร็จรูป)│   │ โมเดลให้คะแนน                │
+└──────────────────────────────┘   │ ปรบมือ92% / ผิวปาก5% / เงียบ3% │
+                                    │      ▼ เกินเกณฑ์ (เช่น >80%)?  │
+                                    │ สั่งงาน: เปลี่ยนสี/เล่นเสียง/คุมเกม │
+                                    └──────────────────────────────┘
+
+ทั้งหมดใน [เบราว์เซอร์ของคุณเอง] (TensorFlow.js) — ไม่ต่อเน็ต ไม่ขึ้นคลาวด์
+```
+
+### 🎓 สิ่งที่ได้เรียนรู้
+
+- เสียงกลายเป็นฟีเจอร์อย่างไร (spectrogram: เปลี่ยนเสียงเป็นภาพ)
+- เกณฑ์และการทริกเกอร์ผิด: ไวไปก็มั่ว ทื่อไปก็พลาด
+- ต่อเข้ากับการกระทำจริง (ลูป รู้จำ → สั่งงาน)
+
+### 🔧 วิธีทำซ้ำ
+
+- เร็วที่สุด: Teachable Machine เลือก 'Audio Project' อัดปรบมือ/ผิวปาก/เงียบ แล้วฝึกทันที
+- ส่งออกโมเดล (TF.js) แล้วรู้จำแบบเรียลไทม์ในหน้าเว็บด้วย ml5.js หรือ TF.js
+- เพิ่มการกระทำ: เมื่อ 'ปรบมือ' ให้หน้าเปลี่ยนสี/เล่นเสียง/คุมเกม
+- ต้องมี: เบราว์เซอร์ + ไมโครโฟน ไม่ต้องมีเซิร์ฟเวอร์
+
+</details>
 
 ---
-_这张卡是 ai-atlas 的一个条目。想改进或新增卡片？欢迎提 PR，见根目录 README。_
+*本文档由 `card.json` 生成 · slug: `sound-trigger` · 三语内容以 card.json 为准*

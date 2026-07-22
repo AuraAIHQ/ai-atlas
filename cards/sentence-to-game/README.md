@@ -1,38 +1,169 @@
-# 一句话生成小游戏  ·  A sentence becomes a game
+# 一句话生成小游戏 · A sentence becomes a game
 
-> 🕹 做个小游戏 · 难度：入门 · 适合：初中→大专 · 约 3 个实验
+> 🕹 做个小游戏 · 入门 · 适合：初中→大专 · 🔗 外部 playground：https://rosebud.ai（第三方托管，可用性以对方为准）
 
-![screenshot](./screenshot.png)
+描述一个游戏，AI 生成一个能玩的网页游戏 + 素材。你来当设计师。
 
-## 体验（先玩）
+### 🎮 体验
+
 描述一个游戏，AI 生成一个能玩的网页游戏 + 素材。你来当设计师，说规则；AI 来当程序员，写代码。
 
-▶ Playground：https://rosebud.ai
-（游戏引擎基础参考：Phaser https://github.com/phaserjs/phaser ）
+### 🧠 原理
 
-## 原理（它怎么工作）
-一个游戏 = **规则 + 素材 + 关卡**，这三样 AI 都能帮你生成：
+这张卡背后真正干活的，是一个「大语言模型」（简称 LLM），跟 ChatGPT 是同一类东西。它跑在服务商的云端机房里，不在你的手机上——因为这种模型太大了，得用专门的服务器和显卡才带得动。
 
-- 你说“一个横版跳跳乐，角色收集星星，碰到旗子过关”，大模型把它**翻译成游戏代码**（通常基于 Phaser、JS 这类它熟悉的引擎），因为它见过大量游戏源码，知道“平台”“碰撞”“得分”怎么写。
-- 素材（角色、星星、平台）可以由生图模型生成，或用内置素材库。
-- 生成后是一个**能立刻玩**的网页；不好玩就继续说“跳高一点 / 加个敌人 / 变难”，它改代码。
+先说它凭什么能「听懂」你的话。你敲进去的那句「做个横版跳跳乐，收集星星，碰到旗子就过关」，在送进模型之前，会先被一个叫「分词器」的部件切成一小块一小块，行话叫 token（词元）。一个 token 大约是一个词或半个词。模型看不懂汉字或字母本身，它把每个 token 变成一串数字，再在这串数字上做运算——所以「理解」这件事，底层其实是数学。
 
-一句话：你负责“好不好玩”的判断，AI 负责把判断落成能跑的代码。
+那它怎么就会写游戏代码？因为在训练时，它读过海量的公开代码，其中包括成千上万个用游戏引擎（比如网页游戏常用的 Phaser）写成的游戏。它没有「背下」某个游戏，而是学会了「当有人要一个收集星星的横版游戏时，代码通常长什么样、用哪些套路」。于是你的描述就像给它一道题目，它顺着自己学过的规律，一个 token 一个 token 地把最可能的代码接龙式地写出来。游戏里的图片素材，则可以另外交给一个「生图模型」画，或直接从素材库取。
 
-## 你能学到什么
-- 把一个想法拆成“规则 / 素材 / 关卡”三件事（游戏设计的最小框架）
+从点击到能玩，整条路是这样的：你打字 → 你的句子被送到云端 → 分词器切成 token → 模型逐字生成对应的游戏代码 → 代码传回你的浏览器 → 浏览器把这段代码跑起来，变成一个真能操作的网页游戏。觉得不好玩？你不用会编程，继续用大白话说「跳高一点」「再加个会动的敌人」，这段话又走一遍同样的流程，模型改代码，画面随之更新。
+
+所以分工很清楚：你当设计师，负责判断「好不好玩、要什么规则」；AI 当程序员，负责把你的判断翻译成真能跑的代码。你不必懂任何一行代码，也能一轮一轮把一个游戏试出来。
+
+### 🗺 架构流程图
+
+```
+[你用大白话描述游戏]
+      ↓
+[句子上传到服务商云端]
+      ↓
+[分词器把句子切成 token]
+      ↓
+[LLM 参照学过的海量游戏代码，逐字生成]
+      ↓
+[生图模型 / 素材库 补上图片素材]
+      ↓
+[游戏代码传回你的浏览器]
+      ↓
+[浏览器运行代码 → 变成能玩的网页游戏]
+      ↺ 不满意？再说「跳高点/加敌人」回到第2步
+─ 大模型跑在云端 GPU · 你只出一张嘴 ─
+```
+
+### 🎓 学到什么
+
+- 把想法拆成“规则/素材/关卡”三件事（游戏设计的最小框架）
 - 用自然语言迭代玩法：设计是一轮轮试出来的
-- 生成之后怎么接手改：导出代码 → 用 Phaser 继续做
+- 生成之后怎么接手改：导出代码用 Phaser 继续做
 
-## 怎么复现（自己做）
-1. **最快（无代码）**：打开 https://rosebud.ai ，用一句话描述你的游戏，和它对话着调；可导出 Phaser/JS 工程。
-2. **打好引擎基础**：跟官方教程做一遍经典“接星星”平台游戏 —— https://docs.phaser.io/phaser/getting-started/making-your-first-phaser-game （Phaser 3，纯 JS，浏览器即可）。
-3. **AI + 引擎结合**：让 LLM 帮你在 Phaser 工程里加新机制（新敌人、新关卡、计分板），每次只加一个。
-4. **进阶**：给游戏加一个 LLM 驱动的 NPC（会“思考”的角色），参考 `github.com/Xin-Ray/Phaser_GAgent-LLM_AI_Agent_Explore`。
-5. **需要**：一个能生成游戏的 AI（Rosebud）或一个 JS 游戏引擎（Phaser）+ 浏览器。
+### 🔧 怎么复现
 
-## 陪伴形象
-本卡配套形象：`doris-smile`（Doris 的一个表情，可做数字徽章 / NFT）。
+- 最快（无代码）：rosebud.ai 一句话描述游戏，对话着调，可导出 Phaser 工程
+- 打好引擎基础：跟 Phaser 官方教程做经典“接星星”平台游戏
+- AI+引擎结合：让 LLM 在 Phaser 工程里加新机制，每次加一个
+- 进阶：给游戏加 LLM 驱动的会“思考”的 NPC
+
+**要点：** 把想法拆成“规则 + 素材 + 关卡” · AI 生成后你怎么改 · 导出 Phaser 继续做
+
+[▶ 去 playground](https://rosebud.ai) · [源码/参考](https://github.com/phaserjs/phaser)
+
+<details>
+<summary><b>English</b></summary>
+
+### 🎮 Experience
+
+Describe a game and AI generates a playable web game plus assets. You're the designer setting the rules; AI is the programmer writing the code.
+
+### 🧠 How it works
+
+The real worker behind this card is a large language model (LLM for short), the same family as ChatGPT. It runs in the provider's cloud data center, not on your phone — these models are too big to run on anything but dedicated servers and graphics cards.
+
+First, how does it 'understand' you? Before your sentence — 'make a side-scrolling jumper, collect stars, touch the flag to win' — reaches the model, a part called a tokenizer chops it into little pieces, called tokens in the jargon. A token is roughly a word or half a word. The model doesn't read letters or characters as such; it turns each token into a string of numbers and does math on those numbers — so 'understanding,' underneath, is really arithmetic.
+
+So how can it write game code? Because during training it read an enormous amount of public code, including thousands of games built on game engines (like Phaser, common for web games). It didn't 'memorize' any one game — it learned 'when someone wants a star-collecting side-scroller, here's what the code usually looks like and which patterns it uses.' Your description is like handing it a problem; following the patterns it studied, it writes out the most likely code one token at a time, like a chain. The picture assets can go to a separate image model, or come from an asset library.
+
+From click to playable, the full path is: you type → your sentence is sent to the cloud → the tokenizer splits it into tokens → the model generates the matching game code token by token → the code is sent back to your browser → your browser runs that code and it becomes a real, playable web game. Not fun? You don't need to code — just keep saying, in plain words, 'jump higher' or 'add a moving enemy,' and that sentence runs through the same pipeline again, the model edits the code, and the screen updates.
+
+So the split is clear: you're the designer, judging 'is it fun, what rules do I want'; the AI is the programmer, translating your judgment into code that actually runs. You can try a whole game into existence, round after round, without knowing a single line of code.
+
+### 🗺 How it flows
+
+```
+[you describe the game in plain words]
+      ↓
+[sentence uploaded to the provider's cloud]
+      ↓
+[tokenizer splits it into tokens]
+      ↓
+[LLM generates code token by token, from the game code it studied]
+      ↓
+[image model / asset library fills in the art]
+      ↓
+[game code sent back to your browser]
+      ↓
+[browser runs the code → a playable web game]
+      ↺ not happy? say "jump higher/add an enemy", back to step 2
+─ the LLM runs on cloud GPUs · you just talk ─
+```
+
+### 🎓 What you learn
+
+- Break an idea into rules / assets / levels (the minimal game-design frame)
+- Iterate gameplay in plain language: design is found through rounds of trying
+- How to take over after generation: export the code and continue in Phaser
+
+### 🔧 How to reproduce
+
+- Fastest (no code): describe your game on rosebud.ai, tune it in chat, export a Phaser project
+- Learn the engine: follow the official Phaser 'collect stars' platformer tutorial
+- AI + engine: have the LLM add mechanics to a Phaser project, one at a time
+- Go further: give the game an LLM-driven NPC that 'thinks'
+
+</details>
+
+<details>
+<summary><b>ภาษาไทย</b></summary>
+
+### 🎮 ประสบการณ์
+
+บรรยายเกม แล้ว AI สร้างเกมเว็บที่เล่นได้พร้อมอาร์ตเวิร์ก คุณเป็นดีไซเนอร์กำหนดกฎ AI เป็นโปรแกรมเมอร์เขียนโค้ด
+
+### 🧠 หลักการ
+
+ตัวที่ทำงานจริงเบื้องหลังการ์ดนี้คือ 'โมเดลภาษาขนาดใหญ่' (เรียกสั้น ๆ ว่า LLM) ตระกูลเดียวกับ ChatGPT มันทำงานในศูนย์ข้อมูลบนคลาวด์ของผู้ให้บริการ ไม่ใช่บนมือถือคุณ เพราะโมเดลแบบนี้ใหญ่เกินกว่าจะรันบนอะไรนอกจากเซิร์ฟเวอร์และการ์ดจอเฉพาะทาง
+
+ก่อนอื่น มัน 'เข้าใจ' คำพูดคุณได้อย่างไร? ก่อนที่ประโยค 'ทำเกมเลื่อนข้างกระโดด เก็บดาว แตะธงเพื่อชนะ' จะถึงโมเดล ส่วนที่เรียกว่า tokenizer จะหั่นมันเป็นชิ้นเล็ก ๆ ศัพท์เทคนิคเรียกว่า token หนึ่ง token ราว ๆ หนึ่งคำหรือครึ่งคำ โมเดลไม่ได้อ่านตัวอักษรตรง ๆ แต่แปลงแต่ละ token เป็นชุดตัวเลข แล้วคำนวณบนตัวเลขเหล่านั้น ดังนั้น 'การเข้าใจ' ที่ระดับล่างสุดจริง ๆ แล้วคือคณิตศาสตร์
+
+แล้วมันเขียนโค้ดเกมได้อย่างไร? เพราะตอนฝึก มันอ่านโค้ดสาธารณะจำนวนมหาศาล รวมถึงเกมหลายพันเกมที่สร้างบนเกมเอนจิน (เช่น Phaser ที่นิยมสำหรับเกมเว็บ) มันไม่ได้ 'ท่องจำ' เกมใดเกมหนึ่ง แต่เรียนรู้ว่า 'เมื่อมีคนอยากได้เกมเลื่อนข้างเก็บดาว โค้ดมักหน้าตาแบบนี้ และใช้แพตเทิร์นไหน' คำบรรยายของคุณเหมือนโจทย์ที่ยื่นให้มัน มันจึงเขียนโค้ดที่เป็นไปได้มากที่สุดออกมาทีละ token ต่อกันเป็นลูกโซ่ ตามแบบแผนที่เรียนมา ส่วนภาพอาร์ตในเกมส่งให้ 'โมเดลสร้างภาพ' อีกตัววาด หรือหยิบจากคลังอาร์ตก็ได้
+
+จากคลิกถึงเล่นได้ เส้นทางเต็มคือ: คุณพิมพ์ → ประโยคถูกส่งขึ้นคลาวด์ → tokenizer หั่นเป็น token → โมเดลสร้างโค้ดเกมที่ตรงกันทีละ token → โค้ดถูกส่งกลับมาที่เบราว์เซอร์ → เบราว์เซอร์รันโค้ดนั้น กลายเป็นเกมเว็บที่เล่นได้จริง ไม่สนุก? คุณไม่ต้องเขียนโปรแกรมเป็น แค่พูดต่อด้วยภาษาชาวบ้านว่า 'กระโดดสูงขึ้น' หรือ 'เพิ่มศัตรูที่ขยับได้' ประโยคนั้นก็วิ่งผ่านกระบวนการเดิมอีกรอบ โมเดลแก้โค้ด แล้วหน้าจอก็อัปเดต
+
+ดังนั้นการแบ่งงานชัดเจน: คุณเป็นดีไซเนอร์ ตัดสินว่า 'สนุกไหม อยากได้กฎอะไร' AI เป็นโปรแกรมเมอร์ แปลการตัดสินของคุณเป็นโค้ดที่รันได้จริง คุณสร้างเกมทั้งเกมให้เกิดขึ้นได้ทีละรอบ ๆ โดยไม่ต้องรู้โค้ดสักบรรทัด
+
+### 🗺 แผนผังการทำงาน
+
+```
+[คุณบรรยายเกมด้วยภาษาชาวบ้าน]
+      ↓
+[ประโยคถูกอัปโหลดขึ้นคลาวด์ของผู้ให้บริการ]
+      ↓
+[tokenizer หั่นประโยคเป็น token]
+      ↓
+[LLM สร้างโค้ดทีละ token จากโค้ดเกมที่ศึกษามา]
+      ↓
+[โมเดลสร้างภาพ / คลังอาร์ต เติมภาพให้]
+      ↓
+[โค้ดเกมถูกส่งกลับมาที่เบราว์เซอร์]
+      ↓
+[เบราว์เซอร์รันโค้ด → เกมเว็บที่เล่นได้]
+      ↺ ไม่พอใจ? พูด "กระโดดสูงขึ้น/เพิ่มศัตรู" กลับไปขั้น 2
+─ LLM รันบน GPU คลาวด์ · คุณแค่พูด ─
+```
+
+### 🎓 สิ่งที่ได้เรียนรู้
+
+- แยกไอเดียเป็น กฎ/อาร์ต/ด่าน (กรอบออกแบบเกมขั้นต่ำ)
+- ปรับเกมเพลย์ด้วยภาษาพูด: ดีไซน์ได้จากการลองหลายรอบ
+- รับช่วงต่อหลังสร้าง: ส่งออกโค้ดแล้วทำต่อใน Phaser
+
+### 🔧 วิธีทำซ้ำ
+
+- เร็วที่สุด (ไม่โค้ด): บรรยายเกมบน rosebud.ai ปรับในแชต ส่งออกโปรเจกต์ Phaser
+- เรียนเอนจิน: ทำตามทูทอเรียล Phaser เกมเก็บดาวคลาสสิก
+- AI + เอนจิน: ให้ LLM เพิ่มกลไกในโปรเจกต์ Phaser ทีละอย่าง
+- ไปต่อ: ใส่ NPC ที่ขับด้วย LLM ให้ 'คิด' ได้
+
+</details>
 
 ---
-_这张卡是 ai-atlas 的一个条目。想改进或新增卡片？欢迎提 PR，见根目录 README。_
+*本文档由 `card.json` 生成 · slug: `sentence-to-game` · 三语内容以 card.json 为准*

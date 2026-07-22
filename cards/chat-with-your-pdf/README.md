@@ -1,32 +1,181 @@
-# 和你的资料对话  ·  Chat with your own docs
+# 和你的资料对话 · Chat with your own docs
 
-> 💬 造个聊天助手 · 难度：进阶 · 适合：大专→大学 / 老师 · 约 3 个实验
+> 💬 造个聊天助手 · 进阶 · 适合：大专→大学 / 老师 · 🔗 外部 playground：https://aistudio.google.com（第三方托管，可用性以对方为准）
 
-![screenshot](./screenshot.png)
+上传 PDF/笔记，做一个基于你自己资料回答的问答机器人。理解 RAG。
 
-## 体验（先玩）
-一句话说明你会做出什么，然后去 playground 玩到结果：
-**上传 PDF/笔记，做一个基于你自己资料回答的问答机器人。理解 RAG。**
+### 🎮 体验
 
-▶ Playground：https://aistudio.google.com
+上传 PDF、笔记，做一个基于你自己资料回答的问答机器人。理解 RAG——让 AI“先查你的资料，再回答”。
 
-## 原理（它怎么工作）
-_用人话讲清背后是什么，配一张示意图。别堆术语。_
+### 🧠 原理
 
-TODO：补一段原理说明。
+大模型几乎什么都懂，唯独不懂「你的那份资料」——它训练时并没有读过你的 PDF、你的课堂笔记、你公司的内部手册。RAG（检索增强生成）就是给它配了一套「开卷考试」的流程：先翻你的资料，再动笔回答，而不是凭记忆瞎答。
 
-## 你能学到什么
-- 为什么要“检索再回答”
-- 切片 / 向量 / 召回的直觉
-- 如何减少一本正经地胡说
+第一步，切片。你上传的文档往往很长，一次性塞不进模型，所以先把它切成一小块一小块（比如每几百字一段），就像把一本厚书拆成许多张读书卡片。
 
-## 怎么复现（自己做）
-1. 打开参考仓库：https://github.com/AlaGrine/RAG_chatabot_with_Langchain
-2. TODO：一步步 clone / run 的说明。
-3. TODO：需要的工具 / API / key。
+第二步，做「向量」（embedding），这是最关键的一步。有一个专门的「嵌入模型」（同样跑在云端），把每一块文字变成一串数字，这串数字代表这段话的「意思」。你可以想象成：给每段话在一张巨大的「意思地图」上标一个坐标——所有讲猫的段落挤在一个角落，所有讲报销的段落在另一头。意思越接近，坐标就越靠近。这些坐标（向量）全部存进一个「向量库」里，排好队等着被查。
 
-## 陪伴形象
-本卡配套形象：`doris-search`（Doris / Cherry 的一个表情，可做数字徽章 / NFT）。
+第三步，把问题也变成向量。你问「请假流程是什么？」，同一个嵌入模型把你的问题也变成一个坐标，然后到意思地图上找离它最近的几张卡片。注意：这是按「意思」找，不是按关键词找。哪怕你一个字都没提到「休假」，讲休假规定的那几段照样能被精准捞出来。
+
+第四步，喂给大模型回答。系统把找到的这几段原文，连同你的问题，一起打包发给云端的大语言模型（LLM），并悄悄叮嘱它一句：「请照着这几段来回答。」于是它答得准、能标明出处（来自第几页第几段），也大大减少了「一本正经地胡说」。
+
+打个比方：这就像你不再逼一个博学的人硬背你家的账本，而是给他配了一位飞快的图书管理员——你一问，管理员先冲进书库抽出最相关的几页拍在桌上，博学的人只要照着这几页讲就行。
+
+所以请记住：让 AI 变可靠的，往往不是换个更聪明的模型，而是「喂对上下文」。RAG 干的就是这件事——先精准找料，再让模型照着料说话。
+
+### 🗺 架构流程图
+
+```
+【准备阶段：把你的资料入库】
+你的 PDF / 笔记
+   ↓ 切片(切成一小块一小块)
+很多文字小块
+   ↓ 嵌入模型(云端)：每块 → 向量(意思坐标)
+存进向量库
+
+【提问阶段：先检索再回答】
+你的问题
+   ↓ 同一个嵌入模型 → 问题也变成向量
+   ↓ 在向量库里找「意思最近」的几块
+最相关的原文片段
+   ↓ [问题 + 这几段原文] 打包
+   ↓ 发给云端大模型(LLM)：「照着这几段回答」
+带出处的答案 → 显示给你
+```
+
+### 🎓 学到什么
+
+- 为什么要“先检索再回答”（模型不知道你的私有资料）
+- 切片 / 向量 / 召回的直觉：按“意思”找，而不是按关键词
+- 如何减少一本正经地胡说：把答案锚在你给的原文上
+
+### 🔧 怎么复现
+
+- 最快：Google AI Studio 上传文件直接问，感受“基于资料回答”
+- 看代码：clone AlaGrine/RAG_chatabot_with_Langchain（LangChain + 向量库 + LLM，Streamlit 界面）
+- 拆开看：文档→切片→embedding→向量库→检索→拼进 prompt→回答
+- 需要：一个 LLM（可接我们的体验卡 token）+ 一个向量库（本地 FAISS 或云）
+
+**要点：** 为什么要“检索再回答” · 切片 / 向量 / 召回的直觉 · 如何减少一本正经地胡说
+
+[▶ 去 playground](https://aistudio.google.com) · [源码/参考](https://github.com/AlaGrine/RAG_chatabot_with_Langchain)
+
+<details>
+<summary><b>English</b></summary>
+
+### 🎮 Experience
+
+Upload PDFs or notes and build a bot that answers from your own material. Understand RAG — make the AI 'look up your docs first, then answer.'
+
+### 🧠 How it works
+
+A big model knows almost everything — except 'your material.' During training it never read your PDFs, your class notes, or your company's internal handbook. RAG (retrieval-augmented generation) gives it an 'open-book exam' routine: look things up in your documents first, then write the answer, instead of answering from memory.
+
+Step 1: chunking. Your uploaded document is usually long and won't fit into the model at once, so it's first split into small pieces (say a few hundred words each) — like tearing a thick book into many index cards.
+
+Step 2: making 'vectors' (embeddings) — the key step. A dedicated 'embedding model' (also running in the cloud) turns each chunk of text into a string of numbers that represents the meaning of that passage. Picture giving every passage a coordinate on a giant 'map of meaning': all the passages about cats cluster in one corner, all the ones about expense reports sit at the other end. The closer the meaning, the closer the coordinates. All these coordinates (vectors) are stored in a 'vector store,' lined up to be searched.
+
+Step 3: turn the question into a vector too. You ask 'What's the leave-request process?' and the same embedding model turns your question into a coordinate, then finds the nearest few cards on the map of meaning. Note: this is search by meaning, not by keyword. Even if you never wrote the exact word 'vacation,' the passages about time-off policy still get pulled out.
+
+Step 4: feed the model to answer. The system bundles those retrieved passages together with your question, sends them to a cloud large language model (LLM), and quietly instructs it: 'Please answer based on these passages.' So it's accurate, can cite the source (which page, which paragraph), and hallucinates far less.
+
+An analogy: instead of forcing a very learned person to memorize your household ledger, you pair them with a lightning-fast librarian — you ask, the librarian dashes into the stacks, slaps the most relevant pages on the table, and the learned person just explains from those pages.
+
+So remember: what makes AI reliable is usually not a smarter model but 'feeding it the right context.' That's exactly what RAG does — find the right material precisely first, then let the model speak from it.
+
+### 🗺 How it flows
+
+```
+[Prep: load your material into the store]
+Your PDF / notes
+   ↓ chunking (split into small pieces)
+many small text chunks
+   ↓ embedding model (cloud): each chunk → vector (meaning coordinate)
+stored in the vector store
+
+[Ask: retrieve first, then answer]
+Your question
+   ↓ same embedding model → question becomes a vector too
+   ↓ find the nearest (by meaning) chunks in the vector store
+the most relevant source passages
+   ↓ [question + those passages] bundled
+   ↓ sent to cloud LLM: "answer based on these"
+answer with citations → shown to you
+```
+
+### 🎓 What you learn
+
+- Why 'retrieve then answer' (the model doesn't know your private docs)
+- The intuition of chunks / vectors / retrieval: search by meaning, not keywords
+- How to reduce confident nonsense: anchor answers to the source text you provide
+
+### 🔧 How to reproduce
+
+- Fastest: upload a file in Google AI Studio and ask — feel 'answering from documents'
+- Read the code: clone AlaGrine/RAG_chatabot_with_Langchain (LangChain + vector store + LLM, Streamlit UI)
+- Take it apart: docs → chunks → embeddings → vector store → retrieval → stuff into prompt → answer
+- You need: an LLM (can run on your card tokens) + a vector store (local FAISS or cloud)
+
+</details>
+
+<details>
+<summary><b>ภาษาไทย</b></summary>
+
+### 🎮 ประสบการณ์
+
+อัปโหลด PDF หรือโน้ต แล้วสร้างบอตที่ตอบจากเอกสารของคุณเอง เข้าใจ RAG — ให้ AI 'ค้นเอกสารของคุณก่อน แล้วค่อยตอบ'
+
+### 🧠 หลักการ
+
+โมเดลใหญ่รู้เกือบทุกอย่าง ยกเว้น 'เอกสารของคุณ' — ตอนเทรนมันไม่เคยอ่าน PDF โน้ตในห้องเรียน หรือคู่มือภายในบริษัทของคุณ RAG (retrieval-augmented generation) ให้ขั้นตอนแบบ 'สอบเปิดหนังสือ' กับมัน: ค้นในเอกสารของคุณก่อน แล้วค่อยเขียนคำตอบ ไม่ใช่ตอบจากความจำ
+
+ขั้นที่ 1: หั่นเป็นชิ้น (chunking) เอกสารที่อัปโหลดมักยาว ใส่เข้าโมเดลทีเดียวไม่ได้ จึงหั่นเป็นชิ้นเล็ก ๆ ก่อน (เช่นชิ้นละไม่กี่ร้อยคำ) เหมือนฉีกหนังสือหนาเป็นการ์ดอ่านหลาย ๆ ใบ
+
+ขั้นที่ 2: ทำ 'เวกเตอร์' (embedding) ขั้นสำคัญที่สุด มี 'โมเดล embedding' เฉพาะ (รันบนคลาวด์เช่นกัน) แปลงข้อความแต่ละชิ้นเป็นชุดตัวเลขที่แทน 'ความหมาย' ของข้อความนั้น ลองนึกภาพว่าให้พิกัดกับแต่ละข้อความบน 'แผนที่ความหมาย' ขนาดใหญ่: ข้อความเรื่องแมวอยู่รวมกันมุมหนึ่ง เรื่องเบิกค่าใช้จ่ายอยู่อีกมุม ยิ่งความหมายใกล้ พิกัดยิ่งใกล้ พิกัด (เวกเตอร์) ทั้งหมดถูกเก็บใน 'vector store' รอการค้นหา
+
+ขั้นที่ 3: แปลงคำถามเป็นเวกเตอร์ด้วย คุณถาม 'ขั้นตอนลาหยุดคืออะไร?' โมเดล embedding ตัวเดิมแปลงคำถามเป็นพิกัด แล้วหาการ์ดที่ใกล้ที่สุดบนแผนที่ความหมาย สังเกต: ค้นด้วยความหมาย ไม่ใช่คีย์เวิร์ด แม้คุณไม่ได้พิมพ์คำว่า 'วันหยุด' เลย ข้อความเรื่องระเบียบการลาก็ยังถูกดึงออกมาได้แม่นยำ
+
+ขั้นที่ 4: ป้อนให้โมเดลตอบ ระบบรวมข้อความที่ค้นเจอเข้ากับคำถามของคุณ ส่งไปยังโมเดลภาษาขนาดใหญ่ (LLM) บนคลาวด์ และกระซิบสั่งว่า 'กรุณาตอบจากข้อความเหล่านี้' มันจึงตอบแม่น อ้างอิงแหล่งได้ (หน้าไหน ย่อหน้าไหน) และมั่วน้อยลงมาก
+
+เปรียบเทียบ: แทนที่จะบังคับคนรอบรู้ให้ท่องบัญชีบ้านคุณ คุณจับคู่เขากับบรรณารักษ์ที่ว่องไวมาก — คุณถาม บรรณารักษ์วิ่งเข้าคลังหนังสือ คว้าหน้าที่เกี่ยวข้องที่สุดมาวางบนโต๊ะ คนรอบรู้ก็แค่อธิบายจากหน้าเหล่านั้น
+
+จำไว้: สิ่งที่ทำให้ AI น่าเชื่อถือมักไม่ใช่โมเดลที่ฉลาดกว่า แต่คือ 'ป้อนบริบทที่ถูกต้อง' นั่นคือสิ่งที่ RAG ทำ — หาเอกสารที่ใช่อย่างแม่นยำก่อน แล้วให้โมเดลพูดจากมัน
+
+### 🗺 แผนผังการทำงาน
+
+```
+[เตรียม: นำเอกสารเข้าคลัง]
+PDF / โน้ตของคุณ
+   ↓ หั่นเป็นชิ้น (chunking)
+ข้อความชิ้นเล็กจำนวนมาก
+   ↓ โมเดล embedding (คลาวด์): แต่ละชิ้น → เวกเตอร์ (พิกัดความหมาย)
+เก็บใน vector store
+
+[ถาม: ค้นก่อนแล้วตอบ]
+คำถามของคุณ
+   ↓ โมเดล embedding ตัวเดิม → คำถามกลายเป็นเวกเตอร์
+   ↓ หาชิ้นที่ใกล้ที่สุด (ตามความหมาย) ใน vector store
+ข้อความต้นฉบับที่เกี่ยวข้องที่สุด
+   ↓ [คำถาม + ข้อความเหล่านั้น] รวมเป็นชุด
+   ↓ ส่งไปยัง LLM บนคลาวด์: "ตอบจากข้อความเหล่านี้"
+คำตอบพร้อมอ้างอิง → แสดงให้คุณ
+```
+
+### 🎓 สิ่งที่ได้เรียนรู้
+
+- ทำไมต้อง 'ค้นก่อนแล้วตอบ' (โมเดลไม่รู้เอกสารส่วนตัวของคุณ)
+- สัญชาตญาณของ chunk / vector / retrieval: ค้นด้วยความหมาย ไม่ใช่คีย์เวิร์ด
+- ลดการมั่วอย่างมั่นใจ: ยึดคำตอบไว้กับข้อความต้นฉบับที่คุณให้
+
+### 🔧 วิธีทำซ้ำ
+
+- เร็วที่สุด: อัปโหลดไฟล์ใน Google AI Studio แล้วถาม สัมผัส 'ตอบจากเอกสาร'
+- ดูโค้ด: clone AlaGrine/RAG_chatabot_with_Langchain (LangChain + vector store + LLM, Streamlit)
+- แยกส่วน: เอกสาร → chunk → embedding → vector store → retrieval → ใส่ใน prompt → ตอบ
+- ต้องมี: LLM (ใช้โทเคนบัตรของเราได้) + vector store (FAISS ในเครื่องหรือคลาวด์)
+
+</details>
 
 ---
-_这张卡是 ai-atlas 的一个条目。想改进或新增卡片？欢迎提 PR，见根目录 README。_
+*本文档由 `card.json` 生成 · slug: `chat-with-your-pdf` · 三语内容以 card.json 为准*

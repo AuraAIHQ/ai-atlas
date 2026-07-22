@@ -1,32 +1,184 @@
-# 用身体控制游戏  ·  Control a game with your body
+# 用身体控制游戏 · Control a game with your body
 
-> 🕹 做个小游戏 · 难度：进阶 · 适合：初中→大专 · 约 4 个实验
+> 🕹 做个小游戏 · 进阶 · 适合：初中→大专 · 🔗 外部 playground：https://teachablemachine.withgoogle.com（第三方托管，可用性以对方为准）
 
-![screenshot](./screenshot.png)
+训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。
 
-## 体验（先玩）
-一句话说明你会做出什么，然后去 playground 玩到结果：
-**训练一个姿态/手势模型，用摄像头控制一个小游戏的角色。**
+### 🎮 体验
 
-▶ Playground：https://teachablemachine.withgoogle.com
+训练一个姿态/手势模型，用摄像头控制一个小游戏的角色——你抬手，屏幕里的小人也抬手。第一次让“身体”变成手柄。
 
-## 原理（它怎么工作）
-_用人话讲清背后是什么，配一张示意图。别堆术语。_
+### 🧠 原理
 
-TODO：补一段原理说明。
+摄像头看到的其实只是一大片会变的彩色小方块（像素），它自己完全不知道“哪块是你的手、哪块是你的肩”。那屏幕上那副青色（cyan）骨架是怎么冒出来的？
 
-## 你能学到什么
-- 姿态识别的输入输出
-- 把模型接进游戏循环
-- 实时性与准确率的权衡
+功劳在一个专门的姿态识别模型，常见的叫 PoseNet，或更新更快的 MoveNet。它事先已经看过海量“人 + 标好关节位置”的图片，练成一身本领：给它一帧画面，它就能在里面找出人体的十几个“关键点”——头、左右肩、左右肘、左右腕、髋、膝、踝……并把每个点的位置用坐标报出来，比如“右手腕在画面的 (320,120) 这个位置，可信度 0.9”。把这些点按骨骼连起来画，就是你看到的那副会跟着你动的骨架。注意：它只吐坐标，并不替你判断“这是在跳还是在蹲”。
 
-## 怎么复现（自己做）
-1. 打开参考仓库：https://github.com/ml5js/ml5-library
-2. TODO：一步步 clone / run 的说明。
-3. TODO：需要的工具 / API / key。
+这张卡真正好玩的地方，是把 AI 和普通编程接起来，分工非常清楚：AI 负责“看懂身体在哪”，你负责“身体怎么控制游戏”。有了坐标，后面就是最朴素的 if 判断，不再需要任何 AI：“如果右手腕的 y 坐标高过右肩的 y 坐标（在屏幕上越往上数字越小），就让游戏里的小人跳一下”；“如果两只手都举过头，就发射”。每一帧都重新拿一次坐标、重新判断一次、更新一次角色，一秒几十次，你就感觉小人在实时跟着你动。
 
-## 陪伴形象
-本卡配套形象：`cherry-run`（Doris / Cherry 的一个表情，可做数字徽章 / NFT）。
+再打个比方：姿态模型就像一个只负责“报点位”的裁判，它盯着场上大喊“你的右手现在在这个高度”，至于“右手举到这个高度算不算得分”，是你这个规则制定者说了算。正因为分工是这样，你不需要懂 AI 的内部，也能把它接进任何一个你写的小游戏——AI 给坐标，你写 if，两边一拍即合。
+
+整条数据流是：摄像头出画面 → 姿态模型出关键点坐标 → 你的规则把坐标翻译成“跳/蹲/左移” → 驱动 p5.js 画出来的游戏角色。
+
+这里有个逃不掉的权衡：模型算得越精细，越准，但越吃算力、越卡；算得越省，越流畅，但偶尔会把你的手认飘。做游戏时你得在“跟手”和“精准”之间挑一个平衡点。
+
+和前面几张一样，PoseNet / MoveNet 是用 TensorFlow.js（通过 ml5.js 调用）在你自己的浏览器里跑的。你的摄像头画面不离开这台电脑、不上传服务器，断网也照样玩——AI 就在你面前这块屏幕背后算，不在远方的云上。
+
+### 🗺 架构流程图
+
+```
+[你的摄像头] 每一帧画面（像素）
+      │
+      ▼
+[姿态模型 PoseNet / MoveNet]  ← 事先学过“人长什么样”
+      │ 找出十几个关键点，输出坐标
+      │ 头/肩/肘/腕/髋/膝/踝… 例：右腕 (320,120)
+      ▼
+[那副 cyan 骨架]  ← 把关键点连线画出来（AI 的活到此为止）
+      │ 坐标交给你
+      ▼
+[你写的规则 if]  例：右腕 y < 右肩 y ？
+      │ 翻译成动作：跳 / 蹲 / 左移
+      ▼
+[p5.js 游戏角色] 实时跟着你动（一秒几十次循环）
+
+全程在【你自己的浏览器】（ml5.js + TensorFlow.js）—— 不联网、不上云
+```
+
+### 🎓 学到什么
+
+- 姿态识别的输入输出：画面进 → 关键点坐标出
+- 把模型接进游戏循环：坐标 → 规则 → 动作
+- 实时性与准确率的权衡：卡顿 vs 精准，怎么取舍
+
+### 🔧 怎么复现
+
+- 最快：Teachable Machine 选“Pose Project”，摆几个姿势各拍一批，训练
+- 写代码：用 ml5.js 的 bodyPose（基于 TF.js），几十行拿到关键点坐标
+- 接游戏：坐标 → 判断动作 → 控制 p5.js 里的小人（见 particle-play 卡打基础）
+- 需要：一个浏览器 + 摄像头；ml5/TF.js 全在本地跑，无需服务器
+
+**要点：** 姿态识别的输入输出 · 把模型接进游戏循环 · 实时性与准确率的权衡
+
+[▶ 去 playground](https://teachablemachine.withgoogle.com) · [源码/参考](https://github.com/ml5js/ml5-library)
+
+<details>
+<summary><b>English</b></summary>
+
+### 🎮 Experience
+
+Train a pose/gesture model and control a game character with your webcam — you raise your arm, the on-screen figure raises its arm. Your body becomes the controller.
+
+### 🧠 How it works
+
+What the webcam sees is really just a big grid of colored squares (pixels) that keep changing; it has no idea 'which square is your hand, which is your shoulder.' So how does that cyan skeleton appear on screen?
+
+The credit goes to a dedicated pose model — commonly PoseNet, or the newer, faster MoveNet. It has already studied huge numbers of 'people with joints labeled' images and trained one skill: give it a frame, and it finds a dozen-plus body 'keypoints' — head, left/right shoulder, elbow, wrist, hip, knee, ankle — and reports each point's position as coordinates, e.g. 'right wrist at (320,120) in the frame, confidence 0.9.' Connect those points along the bones and you get the skeleton that moves with you. Note: it only spits out coordinates; it does not decide for you 'is this a jump or a squat.'
+
+The real fun of this card is wiring AI to ordinary programming, with a very clear division of labor: AI 'understands where the body is,' and you decide 'how the body controls the game.' Once you have coordinates, the rest is the plainest if-statements, no more AI needed: 'if the right wrist's y is higher than the right shoulder's y (on screen, higher means a smaller number), make the game character jump'; 'if both hands are above the head, fire.' Every frame you grab fresh coordinates, judge again, update the character — dozens of times a second — so the figure feels like it moves with you in real time.
+
+Another analogy: the pose model is like a referee whose only job is to 'call positions' — it stares at the field and shouts 'your right hand is at this height right now'; whether 'the right hand at this height counts as a score' is up to you, the rule-maker. Because the split is like this, you don't need to understand the AI's insides to wire it into any little game you write — the AI gives coordinates, you write the if, and the two click together.
+
+The full data flow is: webcam produces frames -> pose model produces keypoint coordinates -> your rules translate coordinates into 'jump / squat / move left' -> driving the game character drawn with p5.js.
+
+There's an unavoidable trade-off here: the finer the model computes, the more accurate but the more compute-hungry and laggy; the leaner it computes, the smoother but occasionally it mis-reads your hand. Building a game, you pick a balance between 'responsiveness' and 'precision.'
+
+As with the other cards, PoseNet / MoveNet run via TensorFlow.js (called through ml5.js) inside your own browser. Your webcam frames never leave this computer, never upload to a server, and it still works offline — the AI computes right behind the screen in front of you, not in some distant cloud.
+
+### 🗺 How it flows
+
+```
+[Your webcam] every frame (pixels)
+      │
+      ▼
+[Pose model PoseNet / MoveNet]  <- already learned 'what a body looks like'
+      │ finds a dozen-plus keypoints, outputs coordinates
+      │ head/shoulder/elbow/wrist/hip/knee/ankle... e.g. right wrist (320,120)
+      ▼
+[That cyan skeleton]  <- connect the keypoints (AI's job ends here)
+      │ hands you the coordinates
+      ▼
+[Your if rules]  e.g. right wrist y < right shoulder y ?
+      │ translate into an action: jump / squat / move left
+      ▼
+[p5.js game character] moves with you (dozens of loops per second)
+
+All in [your own browser] (ml5.js + TensorFlow.js) — no internet, no cloud
+```
+
+### 🎓 What you learn
+
+- A pose model's input/output: frame in → keypoint coordinates out
+- Wiring the model into a game loop: coordinates → rules → actions
+- The real-time vs accuracy trade-off: lag vs precision
+
+### 🔧 How to reproduce
+
+- Fastest: Teachable Machine → 'Pose Project', capture a batch per pose, train
+- Write code: ml5.js bodyPose (on TF.js) gives you keypoint coordinates in a few dozen lines
+- Wire a game: coordinates → detect action → control a p5.js figure (build basics on the particle-play card)
+- You need: a browser + a webcam; ml5/TF.js run entirely locally, no server
+
+</details>
+
+<details>
+<summary><b>ภาษาไทย</b></summary>
+
+### 🎮 ประสบการณ์
+
+ฝึกโมเดลท่าทาง แล้วคุมตัวละครในเกมด้วยเว็บแคม — คุณยกแขน ตัวละครบนจอก็ยกแขน ร่างกายกลายเป็นจอย
+
+### 🧠 หลักการ
+
+สิ่งที่เว็บแคมเห็นแท้จริงคือตารางสี่เหลี่ยมสีจำนวนมาก (พิกเซล) ที่เปลี่ยนไปเรื่อย ๆ มันไม่รู้เลยว่า 'สี่เหลี่ยมไหนคือมือ ไหนคือไหล่' แล้วโครงกระดูกสีฟ้า (cyan) บนจอโผล่มาได้อย่างไร?
+
+เครดิตเป็นของโมเดลท่าทางเฉพาะทาง — ที่พบบ่อยคือ PoseNet หรือ MoveNet ที่ใหม่และเร็วกว่า มันได้ศึกษาภาพ 'คนที่ติดป้ายข้อต่อไว้แล้ว' จำนวนมหาศาล จนฝึกทักษะหนึ่งได้: ให้เฟรมมาหนึ่งเฟรม มันจะหา 'จุดสำคัญ' ของร่างกายกว่าสิบจุด — หัว ไหล่ซ้าย/ขวา ศอก ข้อมือ สะโพก เข่า ข้อเท้า — แล้วรายงานตำแหน่งแต่ละจุดเป็นพิกัด เช่น 'ข้อมือขวาอยู่ที่ (320,120) ในเฟรม ความมั่นใจ 0.9' เชื่อมจุดเหล่านั้นตามกระดูก ก็ได้โครงกระดูกที่ขยับตามคุณ ข้อสังเกต: มันแค่พ่นพิกัดออกมา ไม่ได้ตัดสินแทนคุณว่า 'นี่กระโดดหรือย่อ'
+
+ความสนุกจริงของการ์ดนี้คือการเชื่อม AI เข้ากับการเขียนโปรแกรมธรรมดา โดยแบ่งหน้าที่ชัดเจน: AI 'เข้าใจว่าร่างกายอยู่ตรงไหน' และคุณตัดสิน 'ให้ร่างกายคุมเกมอย่างไร' เมื่อมีพิกัดแล้ว ที่เหลือคือ if ธรรมดาที่สุด ไม่ต้องใช้ AI อีก: 'ถ้า y ของข้อมือขวาสูงกว่า y ของไหล่ขวา (บนจอ ยิ่งสูงตัวเลขยิ่งน้อย) ให้ตัวละครกระโดด'; 'ถ้ายกสองมือเหนือหัว ให้ยิง' ทุกเฟรมคุณดึงพิกัดใหม่ ตัดสินใหม่ อัปเดตตัวละครใหม่ วินาทีละหลายสิบครั้ง ตัวละครจึงรู้สึกเหมือนขยับตามคุณแบบเรียลไทม์
+
+อีกการเปรียบเทียบ: โมเดลท่าทางเหมือนกรรมการที่มีหน้าที่เดียวคือ 'ขานตำแหน่ง' — มันจ้องสนามแล้วตะโกนว่า 'ตอนนี้มือขวาของคุณอยู่ที่ความสูงนี้' ส่วน 'มือขวาที่ความสูงนี้นับเป็นแต้มไหม' คุณผู้วางกฎเป็นคนตัดสิน เพราะแบ่งหน้าที่แบบนี้ คุณไม่ต้องเข้าใจเบื้องลึกของ AI ก็ต่อมันเข้ากับเกมเล็ก ๆ ที่คุณเขียนได้ — AI ให้พิกัด คุณเขียน if แล้วสองฝั่งก็เข้ากันพอดี
+
+สายข้อมูลทั้งหมดคือ: เว็บแคมสร้างเฟรม -> โมเดลท่าทางสร้างพิกัดจุดสำคัญ -> กฎของคุณแปลพิกัดเป็น 'กระโดด/ย่อ/ไปซ้าย' -> ขับตัวละครเกมที่วาดด้วย p5.js
+
+มีข้อแลกเปลี่ยนที่เลี่ยงไม่ได้: โมเดลคำนวณละเอียดเท่าไร ยิ่งแม่นแต่ยิ่งกินพลังและหน่วง คำนวณประหยัดเท่าไร ยิ่งลื่นแต่บางทีอ่านมือคุณเพี้ยน เวลาทำเกมคุณต้องเลือกจุดสมดุลระหว่าง 'ตอบสนองไว' กับ 'แม่นยำ'
+
+เช่นเดียวกับการ์ดอื่น PoseNet / MoveNet รันผ่าน TensorFlow.js (เรียกผ่าน ml5.js) ภายในเบราว์เซอร์ของคุณเอง เฟรมเว็บแคมไม่เคยออกจากเครื่องนี้ ไม่อัปโหลดไปเซิร์ฟเวอร์ และยังเล่นได้แม้ตัดเน็ต — AI คำนวณอยู่หลังจอตรงหน้าคุณ ไม่ใช่บนคลาวด์ที่ไหนไกล ๆ
+
+### 🗺 แผนผังการทำงาน
+
+```
+[เว็บแคมของคุณ] ทุกเฟรม (พิกเซล)
+      │
+      ▼
+[โมเดลท่าทาง PoseNet / MoveNet]  <- เรียนรู้แล้วว่า 'ร่างกายหน้าตาเป็นอย่างไร'
+      │ หาจุดสำคัญกว่าสิบจุด ส่งพิกัดออกมา
+      │ หัว/ไหล่/ศอก/ข้อมือ/สะโพก/เข่า/ข้อเท้า... เช่น ข้อมือขวา (320,120)
+      ▼
+[โครงกระดูกสีฟ้า cyan]  <- เชื่อมจุดสำคัญเป็นเส้น (งานของ AI จบตรงนี้)
+      │ ส่งพิกัดให้คุณ
+      ▼
+[กฎ if ที่คุณเขียน]  เช่น y ข้อมือขวา < y ไหล่ขวา ?
+      │ แปลเป็นการกระทำ: กระโดด / ย่อ / ไปซ้าย
+      ▼
+[ตัวละครเกม p5.js] ขยับตามคุณ (วนลูปวินาทีละหลายสิบครั้ง)
+
+ทั้งหมดใน [เบราว์เซอร์ของคุณเอง] (ml5.js + TensorFlow.js) — ไม่ต่อเน็ต ไม่ขึ้นคลาวด์
+```
+
+### 🎓 สิ่งที่ได้เรียนรู้
+
+- อินพุต/เอาต์พุตของโมเดลท่าทาง: ภาพเข้า → พิกัดจุดสำคัญออก
+- ต่อโมเดลเข้ากับลูปเกม: พิกัด → กฎ → การกระทำ
+- สมดุลเรียลไทม์กับความแม่น: หน่วง vs แม่นยำ
+
+### 🔧 วิธีทำซ้ำ
+
+- เร็วที่สุด: Teachable Machine เลือก 'Pose Project' ถ่ายท่าละชุด แล้วฝึก
+- เขียนโค้ด: ml5.js bodyPose (บน TF.js) ให้พิกัดจุดสำคัญในไม่กี่สิบบรรทัด
+- ต่อเกม: พิกัด → ตรวจการกระทำ → คุมตัวละคร p5.js (ปูพื้นจากการ์ด particle-play)
+- ต้องมี: เบราว์เซอร์ + เว็บแคม ml5/TF.js รันในเครื่องล้วน ไม่ต้องมีเซิร์ฟเวอร์
+
+</details>
 
 ---
-_这张卡是 ai-atlas 的一个条目。想改进或新增卡片？欢迎提 PR，见根目录 README。_
+*本文档由 `card.json` 生成 · slug: `webcam-controller` · 三语内容以 card.json 为准*

@@ -1,32 +1,166 @@
-# 一句话变成动画短片  ·  A sentence becomes a clip
+# 一句话变成动画短片 · A sentence becomes a clip
 
-> 🎬 做个动画 · 难度：入门 · 适合：初中→大学 · 约 3 个实验
+> 🎬 做个动画 · 入门 · 适合：初中→大学 · 🔗 外部 playground：https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning（第三方托管，可用性以对方为准）
 
-![screenshot](./screenshot.png)
+输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。
 
-## 体验（先玩）
-一句话说明你会做出什么，然后去 playground 玩到结果：
-**输入一句话，AI 生成几秒的动画短片。理解“文生视频”是怎么回事。**
+### 🎮 体验
 
-▶ Playground：https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning
+输入一句话，AI 生成几秒的动画短片。第一次看懂“文生视频”是怎么回事——从一句描述，长出会动的画面。
 
-## 原理（它怎么工作）
-_用人话讲清背后是什么，配一张示意图。别堆术语。_
+### 🧠 原理
 
-TODO：补一段原理说明。
+这张卡做的是「文生视频」，干活的是一个跑在云端显卡（GPU）上的 AI 模型，比如 AnimateDiff 这类。为什么必须用远端显卡？因为它要一帧一帧地「想象」出画面，计算量很大，你手机的芯片扛不住，得靠机房里成千上万核心的专业显卡。
 
-## 你能学到什么
-- prompt 如何影响运动与画面
-- 扩散模型 + 运动模块的直觉
-- 可 Duplicate Space 自己跑
+要看懂它，先看它的前身——「文生图」。图像扩散模型（diffusion）有个很妙的本事：它先在画布上撒满电视雪花一样的纯噪点，然后一步步把「不像你要的东西」的噪点擦掉、猜出底下藏着的画面，来回去噪几十步，一张符合你描述的图就「显影」出来了，像照片在药水里慢慢浮现。
 
-## 怎么复现（自己做）
-1. 打开参考仓库：https://huggingface.co/spaces/multimodalart/stable-video-diffusion
-2. TODO：一步步 clone / run 的说明。
-3. TODO：需要的工具 / API / key。
+那你的文字是怎么进去的？它不会直接读你的句子，而是先被一个「文本编码器」翻译成一长串数字，行话叫「向量」——你可以理解成把这句话的意思压成了一串坐标。这串坐标全程在旁边「指挥」去噪：每擦掉一层噪点，都要往「更像这句话描述的样子」去靠。所以 prompt 里的名词决定画面里有什么，动词决定它怎么动。
 
-## 陪伴形象
-本卡配套形象：`doris-surprise`（Doris / Cherry 的一个表情，可做数字徽章 / NFT）。
+视频比图片多干一件难事：让相邻的每一帧既各自成图，又前后连贯，不能这一帧树往左、下一帧树凭空跳到右。AnimateDiff 的办法，是在会画图的模型上加一个「运动模块」，它专门学过「同一个场景里，下一帧该怎么顺着动」，负责把一帧帧之间的动作缝合平滑。
+
+从点击到出片，整条路是：你输入一句话 → 云端把它编码成向量 → 扩散模型从一片噪点开始，在向量指挥下逐帧去噪生成画面 → 运动模块保证帧与帧连贯 → 拼成一段几秒的短片传回你的屏幕。因为要反复去噪、还要同时算好几十帧，它比生成一张图更吃算力，也就更慢、更贵——这也是为什么它跑在远端，而不是你的浏览器里。
+
+### 🗺 架构流程图
+
+```
+[你输入一句话]
+      ↓
+[文本编码器 → 把句意压成向量]
+      ↓
+[云端GPU：先铺满纯噪点]
+      ↓
+[扩散模型：向量指挥下，逐帧一步步去噪]
+      ↓
+[运动模块：缝合相邻帧，保证动作连贯]
+      ↓
+[拼成几秒的动画短片]
+      ↓
+[传回你的屏幕播放]
+─ 反复去噪 + 多帧同算 · 比生成图更慢更贵 · 跑在云端GPU ─
+```
+
+### 🎓 学到什么
+
+- prompt 如何影响运动与画面（动词很关键）
+- 扩散模型 + 运动模块的直觉：图会画了，再教它“动得连贯”
+- 为什么视频比图更难、更慢、更贵（要保持时间上的一致）
+
+### 🔧 怎么复现
+
+- 最快：打开 AnimateDiff-Lightning 或 Stable Video Diffusion 的 Space，输入 prompt 出片
+- 可 Duplicate 那个 Space 到自己账号免费跑（若原 Space 挂了就复制一个）
+- 进阶：Python diffusers 的 AnimateDiffPipeline / StableVideoDiffusion 本地跑
+- 需要：能跑扩散视频的后端（HF / 本地 GPU），比图更吃算力
+
+**要点：** prompt 如何影响运动与画面 · 扩散模型 + 运动模块的直觉 · 可 Duplicate Space 自己跑
+
+[▶ 去 playground](https://huggingface.co/spaces/ByteDance/AnimateDiff-Lightning) · [源码/参考](https://huggingface.co/spaces/multimodalart/stable-video-diffusion)
+
+<details>
+<summary><b>English</b></summary>
+
+### 🎮 Experience
+
+Type a sentence and AI generates a few-second animated clip. Understand text-to-video for the first time — a moving scene grows from a single description.
+
+### 🧠 How it works
+
+This card does text-to-video, and the worker is an AI model running on cloud graphics cards (GPUs) — something like AnimateDiff. Why must it use remote GPUs? Because it has to 'imagine' the picture frame by frame, which is a huge amount of computation; your phone's chip can't handle it, so it leans on professional GPUs with thousands of cores in a data center.
+
+To get it, start with its ancestor — text-to-image. An image diffusion model has a neat trick: it first fills the canvas with pure noise, like TV static, then step by step scrubs away the noise that 'doesn't look like what you asked for' and guesses the picture hidden underneath. After a few dozen denoising steps, an image matching your description 'develops,' like a photo slowly surfacing in a chemical bath.
+
+So how does your text get in? It doesn't read your sentence directly. First a 'text encoder' translates it into a long string of numbers, called a 'vector' in the jargon — think of it as squeezing the meaning of the sentence into a set of coordinates. Those coordinates 'direct' the whole denoising: with every layer of noise removed, it has to lean toward 'looking more like what this sentence describes.' So the nouns in your prompt decide what's in the picture, and the verbs decide how it moves.
+
+Video adds one hard extra job over an image: making each neighboring frame both a picture in its own right and consistent with the ones around it — the tree can't be on the left this frame and jump to the right the next. AnimateDiff's answer is to add a 'motion module' on top of the image-making model; it has studied 'in the same scene, how the next frame should move,' and its job is to stitch the motion between frames smooth.
+
+From click to clip, the full path is: you type a sentence → the cloud encodes it into a vector → the diffusion model starts from a field of noise and denoises frame by frame under the vector's direction → the motion module keeps frame-to-frame motion coherent → the frames are assembled into a few-second clip and sent back to your screen. Because it denoises over and over and computes dozens of frames at once, it's hungrier for compute than making one image — so it's slower and more expensive. That's exactly why it runs far away instead of in your browser.
+
+### 🗺 How it flows
+
+```
+[you type a sentence]
+      ↓
+[text encoder → squeeze the meaning into a vector]
+      ↓
+[cloud GPU: fill the canvas with pure noise]
+      ↓
+[diffusion model: denoise frame by frame, guided by the vector]
+      ↓
+[motion module: stitch neighboring frames, keep motion coherent]
+      ↓
+[assemble into a few-second clip]
+      ↓
+[sent back to your screen to play]
+─ repeated denoising + many frames at once · slower & costlier than an image · runs on cloud GPUs ─
+```
+
+### 🎓 What you learn
+
+- How the prompt shapes motion and scene (verbs matter)
+- The intuition of diffusion + a motion module: it can paint, now teach it coherent motion
+- Why video is harder, slower, costlier than images (temporal consistency)
+
+### 🔧 How to reproduce
+
+- Fastest: open the AnimateDiff-Lightning or Stable Video Diffusion Space and prompt it
+- Duplicate that Space to your own account to run it free (clone one if the original is down)
+- Go deeper: Python diffusers AnimateDiffPipeline / StableVideoDiffusion locally
+- You need: a backend that runs video diffusion (HF / local GPU) — heavier than images
+
+</details>
+
+<details>
+<summary><b>ภาษาไทย</b></summary>
+
+### 🎮 ประสบการณ์
+
+พิมพ์ประโยคหนึ่ง แล้ว AI สร้างคลิปแอนิเมชันไม่กี่วินาที เข้าใจ text-to-video เป็นครั้งแรก — ฉากเคลื่อนไหวงอกจากคำบรรยายเดียว
+
+### 🧠 หลักการ
+
+การ์ดนี้ทำ text-to-video ตัวที่ทำงานคือโมเดล AI ที่รันบนการ์ดจอ (GPU) บนคลาวด์ เช่น AnimateDiff ทำไมต้องใช้ GPU ระยะไกล? เพราะมันต้อง 'จินตนาการ' ภาพทีละเฟรม ซึ่งใช้การคำนวณมหาศาล ชิปในมือถือคุณรับไม่ไหว ต้องพึ่งการ์ดจอมืออาชีพที่มีหลายพันคอร์ในศูนย์ข้อมูล
+
+จะเข้าใจมัน เริ่มจากบรรพบุรุษของมันก่อน — text-to-image โมเดล diffusion ภาพมีลูกเล่นเก๋ ๆ: มันเริ่มด้วยการโปรยสัญญาณรบกวนล้วน ๆ เต็มแคนวาส เหมือนหิมะจอทีวี แล้วค่อย ๆ ขัดสัญญาณรบกวนที่ 'ไม่เหมือนสิ่งที่คุณขอ' ออกทีละขั้น เดาภาพที่ซ่อนอยู่ข้างใต้ หลังลดรบกวนไม่กี่สิบขั้น ภาพที่ตรงกับคำบรรยายก็ 'ปรากฏ' ออกมา เหมือนรูปถ่ายที่ค่อย ๆ ลอยขึ้นในน้ำยา
+
+แล้วข้อความของคุณเข้าไปได้อย่างไร? มันไม่ได้อ่านประโยคคุณตรง ๆ ก่อนอื่น 'text encoder' แปลมันเป็นชุดตัวเลขยาว ๆ ศัพท์เทคนิคเรียกว่า 'เวกเตอร์' นึกภาพว่าเป็นการบีบความหมายของประโยคให้เป็นชุดพิกัด พิกัดเหล่านี้ 'สั่งการ' การลดรบกวนตลอดทาง: ทุกครั้งที่ลอกสัญญาณรบกวนออกหนึ่งชั้น มันต้องเอนไปทาง 'ให้เหมือนสิ่งที่ประโยคนี้บรรยายมากขึ้น' ดังนั้นคำนามใน prompt กำหนดว่ามีอะไรในภาพ คำกริยากำหนดว่ามันขยับอย่างไร
+
+วิดีโอเพิ่มงานยากอีกอย่างเหนือภาพนิ่ง: ทำให้เฟรมข้างเคียงแต่ละเฟรมเป็นทั้งภาพในตัวเอง และสอดคล้องกับเฟรมรอบข้าง ต้นไม้จะอยู่ซ้ายเฟรมนี้แล้วกระโดดไปขวาเฟรมหน้าไม่ได้ คำตอบของ AnimateDiff คือเพิ่ม 'โมดูลการเคลื่อนไหว' บนโมเดลที่วาดภาพได้ มันศึกษามาว่า 'ในฉากเดียวกัน เฟรมถัดไปควรขยับอย่างไร' หน้าที่ของมันคือเย็บการเคลื่อนไหวระหว่างเฟรมให้เนียน
+
+จากคลิกถึงคลิป เส้นทางเต็มคือ: คุณพิมพ์ประโยค → คลาวด์เข้ารหัสเป็นเวกเตอร์ → โมเดล diffusion เริ่มจากผืนสัญญาณรบกวน ลดรบกวนทีละเฟรมภายใต้การสั่งของเวกเตอร์ → โมดูลการเคลื่อนไหวรักษาความต่อเนื่องระหว่างเฟรม → เฟรมถูกประกอบเป็นคลิปไม่กี่วินาที ส่งกลับมาที่จอคุณ เพราะต้องลดรบกวนซ้ำแล้วซ้ำเล่า และคำนวณหลายสิบเฟรมพร้อมกัน มันจึงกินพลังคำนวณมากกว่าการสร้างภาพเดียว ช้ากว่าและแพงกว่า นั่นคือเหตุผลว่าทำไมมันรันไกล ๆ ไม่ใช่ในเบราว์เซอร์คุณ
+
+### 🗺 แผนผังการทำงาน
+
+```
+[คุณพิมพ์ประโยคหนึ่ง]
+      ↓
+[text encoder → บีบความหมายเป็นเวกเตอร์]
+      ↓
+[GPU คลาวด์: โปรยสัญญาณรบกวนล้วนก่อน]
+      ↓
+[โมเดล diffusion: ลดรบกวนทีละเฟรม ภายใต้การสั่งของเวกเตอร์]
+      ↓
+[โมดูลการเคลื่อนไหว: เย็บเฟรมข้างเคียง ให้ต่อเนื่อง]
+      ↓
+[ประกอบเป็นคลิปไม่กี่วินาที]
+      ↓
+[ส่งกลับมาเล่นบนจอคุณ]
+─ ลดรบกวนซ้ำ ๆ + คำนวณหลายเฟรมพร้อมกัน · ช้าและแพงกว่าภาพ · รันบน GPU คลาวด์ ─
+```
+
+### 🎓 สิ่งที่ได้เรียนรู้
+
+- prompt กำหนดการเคลื่อนไหวและฉากอย่างไร (คำกริยาสำคัญ)
+- สัญชาตญาณของ diffusion + โมดูลการเคลื่อนไหว: วาดได้แล้ว สอนให้ขยับต่อเนื่อง
+- ทำไมวิดีโอยาก ช้า และแพงกว่าภาพ (ความสอดคล้องตามเวลา)
+
+### 🔧 วิธีทำซ้ำ
+
+- เร็วที่สุด: เปิด Space ของ AnimateDiff-Lightning หรือ Stable Video Diffusion แล้วป้อน prompt
+- Duplicate Space ไปบัญชีตัวเองเพื่อรันฟรี (ถ้าตัวเดิมล่มก็ก็อปใหม่)
+- ลงลึก: Python diffusers AnimateDiffPipeline / StableVideoDiffusion ในเครื่อง
+- ต้องมี: แบ็กเอนด์ที่รัน video diffusion (HF / GPU) ใช้พลังมากกว่าภาพ
+
+</details>
 
 ---
-_这张卡是 ai-atlas 的一个条目。想改进或新增卡片？欢迎提 PR，见根目录 README。_
+*本文档由 `card.json` 生成 · slug: `prompt-to-clip` · 三语内容以 card.json 为准*
