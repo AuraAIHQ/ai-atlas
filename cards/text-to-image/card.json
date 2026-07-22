@@ -1,0 +1,84 @@
+{
+  "slug": "text-to-image",
+  "schema": 1,
+  "title": {
+    "zh": "一句话变一张图",
+    "en": "A sentence becomes an image",
+    "th": "ประโยคเดียวเป็นภาพ"
+  },
+  "category": "drawing",
+  "categoryLabel": "🎨 涂鸦成画",
+  "difficulty": "入门",
+  "ageBands": "人人",
+  "experiments": 3,
+  "summary": {
+    "zh": "输入一句话，AI 当场生成一张图 —— 这张卡的 playground 是我们自己搭的，出图按 token 计量。",
+    "en": "Type a sentence and AI makes an image on the spot — this card's playground is our own, metered by tokens.",
+    "th": "พิมพ์ประโยคหนึ่ง AI สร้างภาพทันที — playground ของการ์ดนี้เราสร้างเอง คิดค่าตามโทเคน"
+  },
+  "cover": "screenshot.png",
+  "playground": {
+    "embed": "/play/text-to-image",
+    "selfHosted": true,
+    "url": "/play/text-to-image"
+  },
+  "source": {
+    "repo": "https://github.com/huggingface/diffusers"
+  },
+  "takeaways": [
+    "文生图：从噪声一步步去噪成图",
+    "prompt 越具体越可控",
+    "这就是我们自建、可计量的出图后端"
+  ],
+  "companion": "cherry-smile",
+  "status": "draft",
+  "body": {
+    "experience": {
+      "zh": "输入一句话，AI 当场把它变成一张图。这张卡的 playground 是「我们自己搭的」（跑在我们自己的 GPU 上），出图按 token 计量——所以它是我们自己的，不是外链。",
+      "en": "Type a sentence and AI turns it into an image on the spot. This card's playground is our own (running on our own GPU), metered by tokens — truly ours, not an external link.",
+      "th": "พิมพ์ประโยคหนึ่ง AI เปลี่ยนเป็นภาพทันที playground ของการ์ดนี้เราสร้างเอง (รันบน GPU ของเราเอง) คิดค่าตามโทเคน จึงเป็นของเราจริง ๆ"
+    },
+    "principle": {
+      "zh": "文生图用扩散模型：从一张纯噪声开始，模型参照你的文字一步步「去噪」，直到显出符合描述的图。我们用的 SD-Turbo 只要 1–2 步就能出图，所以很快。描述越具体（主体、风格、光线、氛围）越可控。背后是把模型部署在 Modal 的 serverless GPU（用完即停），前面用你的钱包 token 计量——这就是「自建 + 可计量」的出图。",
+      "en": "Text-to-image uses a diffusion model: from pure noise, guided by your words, it denoises step by step until an image appears. We use SD-Turbo (1–2 steps), so it's fast. The more specific your description, the more control. Behind it we deploy the model on Modal's serverless GPU (scale-to-zero) and meter it with your wallet tokens.",
+      "th": "text-to-image ใช้โมเดล diffusion: จากสัญญาณรบกวนล้วน ลดรบกวนทีละขั้นตามคำของคุณจนได้ภาพ เราใช้ SD-Turbo (1–2 ขั้น) จึงเร็ว ยิ่งบรรยายเจาะจงยิ่งควบคุมได้ เบื้องหลังรันบน serverless GPU ของ Modal และคิดค่าด้วยโทเคน"
+    },
+    "learn": {
+      "zh": [
+        "文生图 = 噪声 → 去噪 → 成图（扩散的直觉）",
+        "prompt 的具体程度决定可控程度",
+        "自建推理 + token 计量是怎么跑起来的"
+      ],
+      "en": [
+        "Text-to-image = noise -> denoise -> image (the diffusion intuition)",
+        "Prompt specificity determines control",
+        "How self-hosted inference + token metering actually runs"
+      ],
+      "th": [
+        "text-to-image = สัญญาณรบกวน -> ลดรบกวน -> ภาพ",
+        "ความเจาะจงของ prompt กำหนดการควบคุม",
+        "การรันเอง + คิดค่าโทเคนทำงานอย่างไร"
+      ]
+    },
+    "reproduce": {
+      "zh": [
+        "最快：直接用本页 playground（我们自建）出图",
+        "看模型：SD-Turbo（stabilityai/sd-turbo），diffusers 几行就能跑",
+        "自建后端：把模型部署到 Modal serverless GPU，套一个鉴权 web endpoint",
+        "计量：用一个钱包记 token，成功出图才扣费（见 /api/play）"
+      ],
+      "en": [
+        "Fastest: use the playground on this page (ours)",
+        "See the model: SD-Turbo, a few lines with diffusers",
+        "Self-host: deploy on Modal serverless GPU behind an authed endpoint",
+        "Metering: a wallet tracks tokens; charge only on success (see /api/play)"
+      ],
+      "th": [
+        "เร็วที่สุด: ใช้ playground บนหน้านี้",
+        "ดูโมเดล: SD-Turbo ไม่กี่บรรทัดด้วย diffusers",
+        "รันเอง: ดีพลอยบน Modal serverless GPU หลัง endpoint ที่ยืนยันตัวตน",
+        "คิดค่า: กระเป๋าเก็บโทเคน หักเมื่อสำเร็จ (ดู /api/play)"
+      ]
+    }
+  }
+}
